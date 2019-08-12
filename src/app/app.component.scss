@@ -7,6 +7,28 @@
 }
 
 .mat-card-header-title {
-    font-size: 50px;
+    font-family: 'Leckerli One';
+    font-size: 45px;
     font-weight: bold;
+}
+
+.mat-card-header-subtitle {
+    padding-top: 48px;
+    color: #282828;
+    font-family: 'Leckerli One';
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.example-header-image {
+    height: 100px;
+    width: 100px;
+    background-image: url('../assets/android-chrome-512x512.png');
+    background-size: cover;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
 }

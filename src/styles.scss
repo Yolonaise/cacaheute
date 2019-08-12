@@ -3,6 +3,11 @@
 //Import the material themes
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+@font-face {
+  font-family: Leckerli One;
+  src: url('assets/LeckerliOne-Regular.otf') format('opentype')
+}
+
 body, html {
     height: 100%;
   }

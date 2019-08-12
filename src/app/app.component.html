@@ -1,8 +1,17 @@
 <div>
     <mat-card>
         <mat-card-header>
-            <mat-card-title><p class="mat-card-header-title">{{ title }}</p></mat-card-title>
+            <div class="grid-container">
+                <div style="grid-column: 1; margin: 10px;">
+                    <div mat-card-avatar class="example-header-image"></div>
+                </div>
+                <div style="grid-column: 2; margin: 10px;">
+                    <mat-card-title><p class="mat-card-header-title">{{ title }}</p></mat-card-title>
+                </div>
+                <div style="grid-column: 3; margin: 10px">
+                    <mat-card-subtitle><p class="mat-card-header-subtitle">A SantaClause helper</p></mat-card-subtitle>    
+                </div>
+            </div>
         </mat-card-header>
-        <p>here is a great app where we can randomly set a Santa for all your mates !</p>
     </mat-card>
 </div>
