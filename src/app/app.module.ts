@@ -9,10 +9,12 @@ import { MatCardModule } from "@angular/material/card";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppComponent } from './app.component';
+import { CreateGameComponent } from './create-game/create-game.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreateGameComponent
   ],
   imports: [
     BrowserModule,
