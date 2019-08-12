@@ -2,3 +2,20 @@
 
 //Import the material themes
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+body, html {
+    height: 100%;
+  }
+  
+.bg { 
+    /* The image used */
+    background-image: url("./assets/mainbackground.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
