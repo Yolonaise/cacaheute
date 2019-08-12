@@ -14,4 +14,4 @@ script:
   - npm install
   - ng build --prod
 after_script:
-  - firebase deploy --token "$FIREBASE_TOKEN"
+  - firebase deploy --token "4xV_-QgWrxmHaVl0ISum-hLO8gUQ5oZ4I2eNwkohuGw"
