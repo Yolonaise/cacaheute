@@ -13,4 +13,5 @@ before_script:
 script:
   - npm install
   - ng build --prod
-  - firebase deploy --token "$FIREBASE_TOKEN" --non-interactive
+after_script:
+  - firebase deploy --token "$FIREBASE_TOKEN"
