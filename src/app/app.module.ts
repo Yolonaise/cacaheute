@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 //All materials components imports are here !
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 //Animations module activation for material components.
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -20,7 +22,9 @@ import { CreateGameComponent } from './create-game/create-game.component';
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
