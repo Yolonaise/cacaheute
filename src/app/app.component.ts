@@ -9,6 +9,5 @@ export class AppComponent {
   title = 'Cacaheute';
 
   ngOnInit() {
-    AOS.init();
   }
 }
