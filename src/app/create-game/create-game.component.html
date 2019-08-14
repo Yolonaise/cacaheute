@@ -1,30 +1,52 @@
-<div class='container' >
-    <mat-card data-aos="fade-up">
-        <mat-accordion>
-            
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Create
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        a Cacaheute
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-            
-            </mat-expansion-panel>
+<mat-card data-aos="fade-up">
+    <mat-accordion>
 
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Rejoin
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        a Cacaheute
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-            
-            </mat-expansion-panel>    
-        </mat-accordion>
-    </mat-card>
-</div>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Create
+                </mat-panel-title>
+                <mat-panel-description>
+                    a Cacaheute
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="horizontal">
+                <mat-form-field>
+                    <input matInput placeholder="Cacaheute name" [(value)]="name">
+                </mat-form-field>
+
+                <div class="container" *ngFor="let person of persons; let i = index">
+                    <mat-form-field>
+                        <input matInput placeholder="name" [(value)]="person.name">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="email" [(value)]="person.email">
+                    </mat-form-field>
+                    <button mat-button (click)="removePerson(i)">remove</button>
+                </div>
+
+                <button mat-button (click)="addPerson()">add person</button>
+
+                <mat-form-field>
+                    <input matInput placeholder="Price" [(value)]="price">
+                </mat-form-field>
+
+                <button mat-button (click)="onCreateGame()">create</button>
+            </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Rejoin
+                </mat-panel-title>
+                <mat-panel-description>
+                    a Cacaheute
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+</mat-card>

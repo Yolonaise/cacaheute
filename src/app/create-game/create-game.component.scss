@@ -2,7 +2,16 @@
     position: absolute;
     left: 45%;
     top: 45%;
-    transform: translate(-50%, -50%);
+    transform: translate(-40%, -40%);
     background: #efefef66;
     color: white;
+}
+
+.mat-expansion-panel {
+    background: #e3f5ff7a;
+}
+
+.horizontal {
+    float: left;
+    display: inline-grid;
 }
