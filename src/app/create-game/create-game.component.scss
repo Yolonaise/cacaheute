@@ -1,15 +1,39 @@
 .mat-card {
+    max-width: 700px;
     position: inline-block;
     background: #efefef66;
     color: white;
+    text-align: center;
+}
+
+.mat-accordion {
+    position: inline-block;
+    text-align: center;
 }
 
 .mat-expansion-panel {
     position: inline-block;
     background: #e3f5ff7a;
+    text-align: center;
 }
 
 .horizontal {
-    float: left;
     display: inline-grid;
+}
+
+.horizontal-persons {
+    padding: 0px 30px;
+    display: inline-grid;
+}
+
+.cacaheute-font{
+    font-family: 'Leckerli One';
+}
+
+.action-success {
+    background: #7effb4ce;
+}
+
+.action-cancel {
+    background: #f89655ce;
 }

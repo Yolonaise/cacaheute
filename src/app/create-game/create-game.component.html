@@ -4,10 +4,10 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Create
+                    <b>CREATE</b>
                 </mat-panel-title>
                 <mat-panel-description>
-                    a Cacaheute
+                    <b class="cacaheute-font">a Cacaheute</b>
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
@@ -19,7 +19,9 @@
                 <mat-form-field>
                     <input matInput placeholder="Price" [(ngModel)]="price">
                 </mat-form-field>
-
+            </div>
+            <div class="horizontal-persons">
+                <p><b>Persons</b></p>
                 <mat-accordion hideToggle="true">
                     <mat-expansion-panel *ngFor="let person of persons; let i = index" expanded="true">
                         <mat-expansion-panel-header>
@@ -33,24 +35,25 @@
                             <input matInput placeholder="email" [(ngModel)]="person.email">
                         </mat-form-field>
                         <mat-action-row>
-                            <button mat-button (click)="removePerson(i)">remove</button>
+                            <button mat-button .action-cancel (click)="removePerson(i)">remove</button>
                         </mat-action-row>
                     </mat-expansion-panel>
                 </mat-accordion>
-
-                <button mat-button (click)="addPerson()">add person</button>
-                <button mat-button (click)="onCreateGame()">create</button>
             </div>
-
+            <mat-action-row>
+                <button mat-button class="action-success" style="display: inline-block;" (click)="addPerson()">add
+                    person</button>
+                <button mat-button class="action-success" (click)="onCreateGame()">create</button>
+            </mat-action-row>
         </mat-expansion-panel>
 
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Rejoin
+                    <b>REJOIN</b>
                 </mat-panel-title>
                 <mat-panel-description>
-                    a Cacaheute
+                    <b class="cacaheute-font">a Cacaheute</b>
                 </mat-panel-description>
             </mat-expansion-panel-header>
         </mat-expansion-panel>
