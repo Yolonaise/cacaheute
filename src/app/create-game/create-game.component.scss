@@ -12,13 +12,16 @@
 }
 
 .mat-expansion-panel {
-    position: inline-block;
+    text-align: left;
     background: #e3f5ff7a;
-    text-align: center;
+}
+
+.mat-stroked-button {
+    padding: 0px 10px;
 }
 
 .horizontal {
-    display: inline-grid;
+    display: inline;
 }
 
 .horizontal-persons {
@@ -30,10 +33,12 @@
     font-family: 'Leckerli One';
 }
 
-.action-success {
-    background: #7effb4ce;
+.vertical{
+    display: grid;
+    grid-row: auto auto;
 }
 
-.action-cancel {
-    background: #f89655ce;
+.button-row button,
+.button-row a {
+    margin-right: 8px;
 }
