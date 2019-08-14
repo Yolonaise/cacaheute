@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'
 
 //All materials components imports are here !
 import { MatButtonModule } from "@angular/material/button";
@@ -33,7 +34,8 @@ import { CreateGameComponent } from './create-game/create-game.component';
     MatFormFieldModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule
   ],
   providers: [
     GameService

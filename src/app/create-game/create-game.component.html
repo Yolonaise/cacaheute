@@ -13,25 +13,32 @@
 
             <div class="horizontal">
                 <mat-form-field>
-                    <input matInput placeholder="Cacaheute name" [(value)]="name">
+                    <input matInput placeholder="Cacaheute name" [(ngModel)]="name">
                 </mat-form-field>
-
-                <div class="container" *ngFor="let person of persons; let i = index">
-                    <mat-form-field>
-                        <input matInput placeholder="name" [(value)]="person.name">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder="email" [(value)]="person.email">
-                    </mat-form-field>
-                    <button mat-button (click)="removePerson(i)">remove</button>
-                </div>
-
-                <button mat-button (click)="addPerson()">add person</button>
 
                 <mat-form-field>
-                    <input matInput placeholder="Price" [(value)]="price">
+                    <input matInput placeholder="Price" [(ngModel)]="price">
                 </mat-form-field>
 
+                <mat-accordion hideToggle="true">
+                    <mat-expansion-panel *ngFor="let person of persons; let i = index" expanded="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{ person.name }}</mat-panel-title>
+                            <mat-panel-description>{{ person.email }}</mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-form-field>
+                            <input matInput placeholder="name" [(ngModel)]="person.name">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="email" [(ngModel)]="person.email">
+                        </mat-form-field>
+                        <mat-action-row>
+                            <button mat-button (click)="removePerson(i)">remove</button>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+                <button mat-button (click)="addPerson()">add person</button>
                 <button mat-button (click)="onCreateGame()">create</button>
             </div>
 
@@ -46,7 +53,6 @@
                     a Cacaheute
                 </mat-panel-description>
             </mat-expansion-panel-header>
-
         </mat-expansion-panel>
     </mat-accordion>
 </mat-card>

@@ -1,13 +1,11 @@
 .mat-card {
-    position: absolute;
-    left: 45%;
-    top: 45%;
-    transform: translate(-40%, -40%);
+    position: inline-block;
     background: #efefef66;
     color: white;
 }
 
 .mat-expansion-panel {
+    position: inline-block;
     background: #e3f5ff7a;
 }
 

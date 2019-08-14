@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GameService } from 'src/serivces/game.service';
 import { Person } from 'cacaheute-objects/models/cacaheute.person';
 
@@ -10,9 +10,9 @@ import { Person } from 'cacaheute-objects/models/cacaheute.person';
 
 export class CreateGameComponent implements OnInit {
 
-  name: string = "";
-  persons: Person[] = [];
-  price: number = 0;
+  @Input() name: string = "";
+  @Input() persons: Person[] = [];
+  @Input() price: number = 0;
 
   readonly gameService: GameService;
 
@@ -29,8 +29,11 @@ export class CreateGameComponent implements OnInit {
   }
 
   addPerson() {
-    console.log(this.name);
-    let p: Person = {};
+    let p: Person = {
+      email: "",
+      name: "",
+      suggests: []
+    };
     this.persons.push(p);
   }
 
