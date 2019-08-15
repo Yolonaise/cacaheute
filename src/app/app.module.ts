@@ -10,6 +10,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 //Animations module activation for material components.
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -35,7 +37,9 @@ import { CreateGameComponent } from './create-game/create-game.component';
     MatProgressBarModule,
     MatSnackBarModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatListModule,
+    MatTooltipModule
   ],
   providers: [
     GameService

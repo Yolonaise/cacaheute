@@ -1,71 +1,67 @@
-<mat-card data-aos="fade-up">
-    <mat-accordion>
+<mat-accordion data-aos="fade-up">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <b>CREATE</b>
+            </mat-panel-title>
+            <mat-panel-description>
+                <b class="cacaheute-font">a Cacaheute</b>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
 
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <b>CREATE</b>
-                </mat-panel-title>
-                <mat-panel-description>
-                    <b class="cacaheute-font">a Cacaheute</b>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <div class="vertical">
-                <div class="horizontal">
-                    <div style="padding: 5px">
-                        <mat-form-field>
-                            <input matInput placeholder="Cacaheute name" [(ngModel)]="name">
-                        </mat-form-field>
-                    </div>
-                    
-                    <div style="padding: 5px">
-                        <mat-form-field>
-                            <input matInput placeholder="Price" [(ngModel)]="price">
-                        </mat-form-field>
-                    </div>
+        <div style="display: grid">
+            <div class="horizontal column1">
+                <div style="padding: 5px">
+                    <mat-form-field>
+                        <mat-label>Cacaheute name</mat-label>
+                        <input matInput placeholder="Noel 1987" hint="the name of the event" [(ngModel)]="name" required>
+                        <mat-hint><b>The event name</b></mat-hint>
+                    </mat-form-field>
                 </div>
-    
-                <div class="horizontal-persons">
-                    <p><b>Persons</b></p>
-                    <mat-accordion>
-                        <mat-expansion-panel *ngFor="let person of persons; let i = index" expanded="true">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>{{ person.name }}</mat-panel-title>
-                                <mat-panel-description>{{ person.email }}</mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <mat-form-field>
-                                <input matInput placeholder="name" [(ngModel)]="person.name">
-                            </mat-form-field>
-                            <mat-form-field>
-                                <input matInput placeholder="email" [(ngModel)]="person.email">
-                            </mat-form-field>
-                            <mat-action-row>
-                                <button mat-button mat-stroked-button color="warn" (click)="removePerson(i)">remove</button>
-                            </mat-action-row>
-                        </mat-expansion-panel>
-                    </mat-accordion>
+                
+                <div style="padding: 5px">
+                    <mat-form-field>
+                        <input matInput placeholder="Price" type="number" [(ngModel)]="price" required>
+                        <span matSuffix>€</span>
+                    </mat-form-field>
                 </div>
             </div>
-            
-            <mat-action-row>
-                <div class="button-row">
-                    <button mat-stroked-button color="primary" (click)="addPerson()">add
-                        person</button>
-                    <button mat-stroked-button color="primary" (click)="onCreateGame()">create</button>
-                </div>
-            </mat-action-row>
-        </mat-expansion-panel>
 
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <b>REJOIN</b>
-                </mat-panel-title>
-                <mat-panel-description>
-                    <b class="cacaheute-font">a Cacaheute</b>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-        </mat-expansion-panel>
-    </mat-accordion>
-</mat-card>
+            <div class="horizontal-persons column2">
+                <mat-nav-list>
+                    <mat-list-item *ngFor="let person of persons; let i = index;">
+                        <div style="margin: 0px 5px">
+                            <mat-form-field>
+                                <input matInput placeholder="Name" [(ngModel)]="person.name" required>
+                            </mat-form-field>
+                        </div>
+                        <div style="margin: 0px 5px">
+                            <mat-form-field>
+                                <input matInput placeholder="Email" [(ngModel)]="person.email" required>
+                            </mat-form-field>
+                        </div>
+                        <div style="margin: 0px 5px">
+                                <button mat-button color="warn" (click)="removePerson(i)">Remove</button>  
+                        </div>
+                    </mat-list-item>
+                </mat-nav-list>
+            </div>            
+        </div> 
+        <mat-action-row>
+            <button mat-button color="primary" (click)="addPerson()">add person</button>
+            <button mat-button color="primary" (click)="onCreateGame()">create</button>
+            <button mat-button color="warn" (click)="onInitCreateGame()">init</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <b>REJOIN</b>
+            </mat-panel-title>
+            <mat-panel-description>
+                <b class="cacaheute-font">a Cacaheute</b>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+</mat-accordion>

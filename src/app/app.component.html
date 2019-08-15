@@ -1,18 +1,20 @@
 <div>
     <mat-progress-bar *ngIf="isLoading == true" mode="indeterminate"></mat-progress-bar>
-    <mat-card>
-        <mat-card-header>
-            <div class="grid-container">
-                <div style="grid-column: 1; margin: 10px;">
-                    <div mat-card-avatar class="example-header-image"></div>
-                </div>
-                <div style="grid-column: 2; margin: 10px;">
-                    <mat-card-title><p class="mat-card-header-title">{{ title }}</p></mat-card-title>
-                </div>
+
+    <div class="w3-display-topleft w3-padding-large w3-xlarge">
+        <div class="grid-container">
+            <div style="grid-column: 1; margin: 10px;">
+                <img class="example-header-image" src="../assets/android-chrome-512x512.png" 
+                     matTooltip="The best way to do santa's job">
             </div>
-        </mat-card-header>
-        <div style="text-align: center;">
-            <app-create-game></app-create-game>
+            <div style="grid-column: 2; margin: 10px; text-align: left;"
+                 matTooltip="The best way to do santa's job">
+                <p class="title">{{ title }}</p>
+            </div>
         </div>
-    </mat-card>
+    </div>
+    
+    <div class="w3-display-middle">
+        <app-create-game></app-create-game>
+    </div>
 </div>

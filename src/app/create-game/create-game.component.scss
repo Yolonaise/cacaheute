@@ -1,44 +1,27 @@
-.mat-card {
-    max-width: 700px;
-    position: inline-block;
-    background: #efefef66;
-    color: white;
-    text-align: center;
+
+.column1 {
+    margin: 7px;
+    grid-column: 1;
 }
 
-.mat-accordion {
-    position: inline-block;
-    text-align: center;
+.column2 {
+    margin: 7px;
+    grid-column: 2;
 }
 
 .mat-expansion-panel {
-    text-align: left;
-    background: #e3f5ff7a;
+    background: #ffffff99
 }
 
-.mat-stroked-button {
-    padding: 0px 10px;
+.cacaheute-font {
+    font-family: 'Leckerli One';
+    font-weight: bold;
 }
 
 .horizontal {
-    display: inline;
+    display: inline-block;
 }
 
-.horizontal-persons {
-    padding: 0px 30px;
-    display: inline-grid;
-}
-
-.cacaheute-font{
-    font-family: 'Leckerli One';
-}
-
-.vertical{
-    display: grid;
-    grid-row: auto auto;
-}
-
-.button-row button,
-.button-row a {
-    margin-right: 8px;
+.horizontal-person {
+    overflow: auto;    
 }
