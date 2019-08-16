@@ -1,4 +1,8 @@
 
+.grid-wrapper{
+    display: grid;
+}
+
 .column1 {
     margin: 7px;
     grid-column: 1;
@@ -8,6 +12,15 @@
     margin: 7px;
     grid-column: 2;
 }
+@media only screen and (max-width: 400px) {
+    .column2 {
+        overflow: auto;
+        max-width: auto;
+        margin: 7px;
+        grid-column: 1;
+    }
+}
+
 
 .mat-expansion-panel {
     background: #ffffff99
@@ -19,7 +32,7 @@
 }
 
 .horizontal {
-    display: inline-block;
+    display: block;
 }
 
 .horizontal-person {
