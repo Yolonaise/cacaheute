@@ -32,6 +32,9 @@
                 <mat-nav-list>
                     <mat-list-item *ngFor="let person of persons; let i = index;">
                         <div style="margin: 0px 5px">
+                            <mat-checkbox [(checked)]="adminIndex==i" (click)="selectAdmin(i)">you ? </mat-checkbox>
+                        </div>
+                        <div style="margin: 0px 5px">
                             <mat-form-field>
                                 <input matInput placeholder="Name" [(ngModel)]="person.name" required>
                             </mat-form-field>
@@ -66,5 +69,27 @@
                 <b class="cacaheute-font">a Cacaheute</b>
             </mat-panel-description>
         </mat-expansion-panel-header>
+
+        <div style="margin: 0px 5px">
+            <mat-form-field>
+                <mat-label>Cacaheute id</mat-label>
+                <input matInput placeholder="d6garjo0ef53qiiyy01nf2" hint="The id of an event" [(ngModel)]="requestedId"
+                    required>
+                <mat-hint><b>The event identifier</b></mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div style="margin: 0px 5px">
+            <mat-form-field>
+                <input matInput placeholder="john.doe@domain.com" hint="Your mail used in game" [(ngModel)]="invitEmail"
+                    required type="email">
+                <mat-hint><b>The event identifier</b></mat-hint>
+            </mat-form-field>
+        </div>
+
+        <mat-action-row>
+            <button mat-button color="primary" (click)="onRejoinGame()">rejoin</button>
+            <button mat-button color="warn" (click)="onInitRejoin()">init</button>
+        </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>

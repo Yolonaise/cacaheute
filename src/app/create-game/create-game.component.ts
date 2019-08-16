@@ -3,7 +3,6 @@ import { GameService } from 'src/serivces/game.service';
 import { Person } from 'cacaheute-objects/models/cacaheute.person';
 import { CacaheuteGame } from 'cacaheute-objects/models/cacaheute.game';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-create-game',
@@ -17,6 +16,11 @@ export class CreateGameComponent implements OnInit {
   @Input() persons: Person[] = [];
   @Input() price: number = 0;
 
+  @Input() adminIndex: number = 0;
+
+  @Input() invitEmail: string = "";
+  @Input() requestedId: string = "";
+
   constructor(private gameService: GameService, private snackbar: MatSnackBar) {
   }
 
@@ -24,12 +28,12 @@ export class CreateGameComponent implements OnInit {
   }
 
   async onCreateGame() {
-    if(!this.name || this.name === ""){
+    if (!this.name || this.name === "") {
       this.snackbar.open("The event name is empty !");
       return;
     }
 
-    if(!this.persons || this.persons.length < 3){
+    if (!this.persons || this.persons.length < 3) {
       this.snackbar.open("The number of person must be at least 3!");
       return;
     }
@@ -37,17 +41,17 @@ export class CreateGameComponent implements OnInit {
     let msg: string;
     this.persons.forEach(p => {
       msg = this.personValid(p);
-      if(msg){
+      if (msg) {
         return;
-      } 
+      }
     });
 
-    if(msg){
+    if (msg) {
       this.snackbar.open(msg);
       return;
     }
 
-    if(this.price <= 0){
+    if (this.price <= 0) {
       this.snackbar.open("With that price, impossible to make people happy !");
       return;
     }
@@ -55,27 +59,38 @@ export class CreateGameComponent implements OnInit {
     let g: CacaheuteGame = {
       name: this.name,
       persons: this.persons,
-      status: "Init",
-      admin: this.persons[0],
+      status: "Initialized",
+      admin: this.persons[this.adminIndex],
       price: this.price
     }
 
-    await this.gameService.create(g);
+    let result = await this.gameService.create(g);
+    if (result === undefined) {
+      let ref = this.snackbar.open("An error occured when trying to create " + g.name);
+      ref._dismissAfter(3000);
+      return;
+    }
+
+    this.rejoin(g.rejoin_id, g.admin.email);
   }
 
-  personValid(p: Person){
-    if(!p)
+  selectAdmin(index: number) {
+    this.adminIndex = index;
+  }
+  personValid(p: Person) {
+    if (!p)
       return "A persone is empty, fill it";
-    
-    if(!p.name || p.name === "")
+
+    if (!p.name || p.name === "")
       return "A person has no name !";
 
-    if(!p.email || p.email === "")
+    if (!p.email || p.email === "")
       return p.name + " misses an email !";
-    
-    if(!p.email.match("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")){
+
+    if (!p.email.match("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"))
       return p.name + "has an invalid email";
-    }
+
+    return undefined;
   }
   addPerson() {
     let p: Person = {
@@ -86,13 +101,43 @@ export class CreateGameComponent implements OnInit {
     this.persons.push(p);
   }
 
-  removePerson(i) {
-    this.persons.splice(i);
+  removePerson(i: number) {
+    this.persons.splice(i, 1);
   }
 
-  onInitCreateGame(){
+  onInitCreateGame() {
     this.name = "";
     this.persons = [];
     this.price = 0;
+  }
+
+  onRejoinGame() {
+    this.rejoin(this.requestedId, this.invitEmail);
+  }
+
+  onInitRejoin() {
+    this.requestedId = "";
+  }
+
+  async rejoin(id: string, email: string) {
+    if (!id || id === "") {
+      let ref = this.snackbar.open("I can't rejoin without ID");
+      ref._dismissAfter(3000);
+      return;
+    }
+
+    if (!email || email === "") {
+      let ref = this.snackbar.open("I can't rejoin without and email");
+      ref._dismissAfter(3000);
+      return;
+    }
+    let g = await this.gameService.get(id, email);
+    if (g == undefined) {
+      let ref = this.snackbar.open("No game where found with '" + id + "'");
+      ref._dismissAfter(3000);
+      return;
+    }
+
+
   }
 }

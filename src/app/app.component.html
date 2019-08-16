@@ -4,17 +4,18 @@
     <div class="w3-display-topleft w3-padding-large w3-xlarge">
         <div class="grid-container">
             <div style="grid-column: 1; margin: 10px;">
-                <img class="example-header-image" src="../assets/android-chrome-512x512.png" 
-                     matTooltip="The best way to do santa's job">
+                <img class="example-header-image" src="../assets/android-chrome-512x512.png"
+                    matTooltip="The best way to do santa's job" (click)="init()">
             </div>
             <div style="grid-column: 2; margin: 10px; text-align: left;"
-                 matTooltip="The best way to do santa's job">
+                matTooltip="The name is a big mistake, but we endorse it">
                 <p class="title">{{ title }}</p>
             </div>
         </div>
     </div>
-    
+
     <div class="w3-display-middle">
-        <app-create-game></app-create-game>
+        <app-create-game *ngIf="game===undefined"></app-create-game>
+        <app-manage-game *ngIf="game!=undefined"></app-manage-game>
     </div>
 </div>

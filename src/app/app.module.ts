@@ -12,6 +12,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 //Animations module activation for material components.
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -21,11 +22,13 @@ import { GameService } from "../serivces/game.service";
 
 import { AppComponent } from './app.component';
 import { CreateGameComponent } from './create-game/create-game.component';
+import { ManageGameComponent } from './manage-game/manage-game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateGameComponent
+    CreateGameComponent,
+    ManageGameComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { CreateGameComponent } from './create-game/create-game.component';
     MatInputModule,
     FormsModule,
     MatListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCheckboxModule
   ],
   providers: [
     GameService

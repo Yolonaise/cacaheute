@@ -14,7 +14,7 @@ export class AppComponent extends GameListenner {
 
   gameService: GameService;
   title = 'Cacaheute';
-  game: CacaheuteGame;
+  game: CacaheuteGame = undefined;
   isLoading: boolean = false;
 
   constructor(gameService: GameService, private snackbar: MatSnackBar) {
@@ -24,17 +24,20 @@ export class AppComponent extends GameListenner {
   ngOnInit() {
   }
 
+  init() {
+    this.game = undefined;
+  }
   beforeGameCreation(game: CacaheuteGame): void {
     this.isLoading = true;
   }
 
   onGameCreated(game: CacaheuteGame): void {
     this.game = game;
-
-    let snackBarRef = this.snackbar.open('Game ' + game.name + ' is created');
-    snackBarRef._dismissAfter(2000);
-
     this.isLoading = false;
+  }
+
+  onGameRejoined(game: CacaheuteGame): void {
+    this.game = game;
   }
 }
 

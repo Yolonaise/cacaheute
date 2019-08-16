@@ -11,4 +11,5 @@ export abstract class GameListenner {
 
     abstract onGameCreated(game: CacaheuteGame): void;
     abstract beforeGameCreation(game: CacaheuteGame): void;
+    abstract onGameRejoined(game: CacaheuteGame): void;
 }
