@@ -29,12 +29,12 @@ export class CreateGameComponent implements OnInit {
 
   async onCreateGame() {
     if (!this.name || this.name === "") {
-      this.snackbar.open("The event name is empty !");
+      this.displayToast("The event name is empty !", 3000);
       return;
     }
 
     if (!this.persons || this.persons.length < 3) {
-      this.snackbar.open("The number of person must be at least 3!");
+      this.displayToast("The number of person must be at least 3!", 3000);
       return;
     }
 
@@ -47,12 +47,12 @@ export class CreateGameComponent implements OnInit {
     });
 
     if (msg) {
-      this.snackbar.open(msg);
+      this.displayToast(msg, 3000);
       return;
     }
 
     if (this.price <= 0) {
-      this.snackbar.open("With that price, impossible to make people happy !");
+      this.displayToast("With that price, impossible to make people happy !", 3000);
       return;
     }
 
@@ -66,8 +66,7 @@ export class CreateGameComponent implements OnInit {
 
     let result = await this.gameService.create(g);
     if (result === undefined) {
-      let ref = this.snackbar.open("An error occured when trying to create " + g.name);
-      ref._dismissAfter(3000);
+      this.displayToast("An error occured when trying to create " + g.name, 3000);
       return;
     }
 
@@ -121,23 +120,23 @@ export class CreateGameComponent implements OnInit {
 
   async rejoin(id: string, email: string) {
     if (!id || id === "") {
-      let ref = this.snackbar.open("I can't rejoin without ID");
-      ref._dismissAfter(3000);
+      this.displayToast("I can't rejoin without ID", 3000);
       return;
     }
 
     if (!email || email === "") {
-      let ref = this.snackbar.open("I can't rejoin without and email");
-      ref._dismissAfter(3000);
+      this.displayToast("I can't rejoin without and email", 3000);
       return;
     }
     let g = await this.gameService.get(id, email);
     if (g == undefined) {
-      let ref = this.snackbar.open("No game where found with '" + id + "'");
-      ref._dismissAfter(3000);
+      this.displayToast("No game where found with '" + id + "'", 3000);
       return;
     }
+  }
 
-
+  displayToast(msg: string, time: number) {
+    let ref = this.snackbar.open(msg);
+    ref._dismissAfter(3000);
   }
 }
