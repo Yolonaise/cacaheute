@@ -14,11 +14,12 @@
                 <div style="padding: 5px">
                     <mat-form-field>
                         <mat-label>Cacaheute name</mat-label>
-                        <input matInput placeholder="Noel 1987" hint="the name of the event" [(ngModel)]="name" required>
+                        <input matInput placeholder="Noel 1987" hint="the name of the event" [(ngModel)]="name"
+                            required>
                         <mat-hint><b>The event name</b></mat-hint>
                     </mat-form-field>
                 </div>
-                
+
                 <div style="padding: 5px">
                     <mat-form-field>
                         <input matInput placeholder="Price" type="number" [(ngModel)]="price" required>
@@ -41,14 +42,16 @@
                             </mat-form-field>
                         </div>
                         <div style="margin: 0px 5px">
-                                <button mat-button color="warn" (click)="removePerson(i)">Remove</button>  
+                            <button mat-button color="warn" (click)="removePerson(i)">Remove</button>
                         </div>
                     </mat-list-item>
                 </mat-nav-list>
-            </div>            
-        </div> 
+            </div>
+        </div>
         <mat-action-row>
-            <button mat-button color="primary" (click)="addPerson()">add person</button>
+            <button mat-button color="primary" (click)="addPerson()">
+                <p>add person <i *ngIf="persons && (persons.length < 3)">(remains {{ 3 - persons.length }})</i></p>
+            </button>
             <button mat-button color="primary" (click)="onCreateGame()">create</button>
             <button mat-button color="warn" (click)="onInitCreateGame()">init</button>
         </mat-action-row>
