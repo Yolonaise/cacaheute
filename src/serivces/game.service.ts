@@ -1,17 +1,39 @@
 import { CacaheuteGame } from 'cacaheute-objects/models/cacaheute.game'
 import { GameListenner } from 'src/interfaces/GameListenner';
+import { Person } from 'cacaheute-objects/models/cacaheute.person';
 
 export class GameService {
 
   private listenners: GameListenner[] = [];
+  isLoading: boolean = false;
 
   fakeGames: CacaheuteGame[] = [{
     rejoin_id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-    name: "GameTest",
-    admin: undefined,
-    persons: undefined,
+    name: "Un Evenement de test",
+    admin: {
+      email: "nono@gmail.com",
+      name: "nono",
+      suggests: []
+    },
+    persons: [{
+      email: "nono@gmail.com",
+      name: "nono",
+      suggests: []
+    },{
+      email: "nana@gmail.com",
+      name: "nana",
+      suggests: []
+    },{
+      email: "nini@gmail.com",
+      name: "nini",
+      suggests: []
+    }],
     status: "created"
   }];
+
+  getFirstFakeGame(){
+    return this.fakeGames[0];
+  }
 
   createAfter(g: CacaheuteGame, time: number) {
     return new Promise(resolve => {
@@ -54,13 +76,18 @@ export class GameService {
   }
 
   async get(name: string, email: string) {
+    this.isLoading = true;
+
     const result = <CacaheuteGame>await this.getAfter(name, email, 500);
     console.log(result);
 
+    this.isLoading = false;
     return result;
   }
 
   async create(game: CacaheuteGame) {
+    this.isLoading = true;
+
     this.listenners.forEach(l => {
       l.beforeGameCreation(game);
     });
@@ -71,12 +98,18 @@ export class GameService {
     this.listenners.forEach(l => {
       l.onGameCreated(game);
     });
+
+    this.isLoading = false;
     return game;
   }
 
-  onGameRejoin(game: CacaheuteGame) {
+  onGameRejoin(game: CacaheuteGame, person: Person) {
+    this.isLoading = true;
+
     this.listenners.forEach(l => {
-      l.onGameRejoined(game);
+      l.onGameRejoined(game, person);
     });
+
+    this.isLoading = false;
   }
 }
