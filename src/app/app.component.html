@@ -1,5 +1,5 @@
-<div>
-    <mat-progress-bar *ngIf="isLoading == true" mode="indeterminate"></mat-progress-bar>
+<div>   
+    <mat-progress-bar *ngIf="gameService.isLoading == true" mode="indeterminate"></mat-progress-bar>
 
     <div class="w3-display-topleft w3-padding-large w3-xlarge">
         <div class="grid-container">
@@ -16,6 +16,13 @@
 
     <div class="w3-display-middle">
         <app-create-game *ngIf="game===undefined"></app-create-game>
-        <app-manage-game *ngIf="game!=undefined"></app-manage-game>
+        <app-manage-game *ngIf="game!=undefined" [game]="game" [you]="person"></app-manage-game>
+    </div>
+
+    <div class="w3-display-bottomleft w3-padding-large">
+        <div style="background-color: #24242455; color: white">
+            <p>{{ gameService.getFirstFakeGame().rejoin_id }}</p>
+            <p>{{ gameService.getFirstFakeGame().admin.email }}</p>
+        </div>
     </div>
 </div>

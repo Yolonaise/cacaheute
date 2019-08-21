@@ -1,1 +1,19 @@
-<p>manage-game works!</p>
+<div class="w3-display-middle">
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let person of game.persons">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <b *ngIf="person.email===you.email">It's you</b> <p *ngIf="person.email!=you.email">{{ person.name }}</p>
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{ person.email }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+<div class="w3-display-bottomright" *ngIf="game.admin.email===you.email">
+    <p>You are the admin of the game</p>
+</div>
+

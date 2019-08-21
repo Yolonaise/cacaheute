@@ -116,6 +116,7 @@ export class CreateGameComponent implements OnInit {
 
   onInitRejoin() {
     this.requestedId = "";
+    this.invitEmail = "";
   }
 
   async rejoin(id: string, email: string) {
@@ -133,6 +134,19 @@ export class CreateGameComponent implements OnInit {
       this.displayToast("No game where found with '" + id + "'", 3000);
       return;
     }
+
+    let you: Person;
+    g.persons.forEach(p => {
+      if(p.email == email)
+        you = p;
+    });
+
+    if(you == undefined) {
+      this.displayToast("No email where found in the game", 3000);
+      return;
+    }
+
+    this.gameService.onGameRejoin(g, you);
   }
 
   displayToast(msg: string, time: number) {
