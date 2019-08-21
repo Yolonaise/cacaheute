@@ -5,7 +5,7 @@ import { CacaheuteGame } from 'cacaheute-objects/models/cacaheute.game';
 @Injectable()
 export abstract class GameListenner {
 
-    constructor(gameService: GameService) {
+    constructor(public gameService: GameService) {
         gameService.addListenner(this);
     }
 
