@@ -6,7 +6,7 @@ import { Person } from 'cacaheute-objects/models/cacaheute.person';
 @Injectable()
 export abstract class GameListenner {
 
-    constructor(protected gameService: GameService) {
+    constructor(public gameService: GameService) {
         gameService.addListenner(this);
     }
 
