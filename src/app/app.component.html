@@ -1,13 +1,13 @@
-<div>   
-    <mat-progress-bar *ngIf="gameService.isLoading == true" mode="indeterminate"></mat-progress-bar>
+<div>
+    <!-- <mat-progress-bar *ngIf="isLoading == true" mode="indeterminate"></mat-progress-bar> -->
 
     <div class="w3-display-topleft w3-padding-large w3-xlarge">
         <div class="grid-container">
             <div style="grid-column: 1; margin: 10px;">
                 <img class="example-header-image" src="../assets/android-chrome-512x512.png"
-                    matTooltip="The best way to do santa's job" (click)="init()">
+                    matTooltip="The best way to do santa's job">
             </div>
-            <div style="grid-column: 2; margin: 10px; text-align: left;"
+            <div style=" grid-column: 2; margin: 10px; text-align: left;"
                 matTooltip="The name is a big mistake, but we endorse it">
                 <p class="title">{{ title }}</p>
             </div>
@@ -15,14 +15,6 @@
     </div>
 
     <div class="w3-display-middle">
-        <app-create-game *ngIf="game===undefined"></app-create-game>
-        <app-manage-game *ngIf="game!=undefined" [game]="game" [you]="person"></app-manage-game>
-    </div>
 
-    <div class="w3-display-bottomleft w3-padding-large">
-        <div style="background-color: #24242455; color: white">
-            <p>{{ gameService.getFirstFakeGame().rejoin_id }}</p>
-            <p>{{ gameService.getFirstFakeGame().admin.email }}</p>
-        </div>
     </div>
 </div>

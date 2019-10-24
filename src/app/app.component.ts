@@ -1,9 +1,5 @@
-import { Component } from '@angular/core';
-import { CacaheuteGame } from 'cacaheute-objects/models/cacaheute.game'
-import { GameService } from 'src/serivces/game.service';
-import { GameListenner } from 'src/interfaces/GameListenner';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Person } from 'cacaheute-objects/models/cacaheute.person';
+import { Component, OnInit } from '@angular/core';
+import { CacaheuteClient } from 'src/client/cacaheute.client';
 
 @Component({
   selector: 'app-root',
@@ -11,36 +7,14 @@ import { Person } from 'cacaheute-objects/models/cacaheute.person';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent extends GameListenner {
-
+export class AppComponent implements OnInit {
   title = 'Cacaheute';
-  game: CacaheuteGame = undefined;
-  person: Person = undefined;
 
-  constructor(gameService: GameService, private snackbar: MatSnackBar) {
-    super(gameService);
+  constructor() {
   }
 
-  ngOnInit() {
-  }
-
-  init() {
-    this.game = undefined;
-    this.person = undefined;
-    this.title = 'Cacaheute';
-  }
-  beforeGameCreation(game: CacaheuteGame): void {
-  }
-
-  onGameCreated(game: CacaheuteGame): void {
-  }
-
-  onGameRejoined(game: CacaheuteGame, person: Person): void {
-    this.game = game;
-    this.person = person;
-    
-    if(this.game.name && this.game.name.length > 0)
-      this.title = game.name;
+  async ngOnInit() {
+    // let serverStatus = await new CacaheuteClient().getServerStatus();
   }
 }
 
