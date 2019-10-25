@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http'
 // All materials components imports are here !
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // All services are here
 
 import { AppComponent } from './app.component';
+import { CacaheuteClient } from 'src/client/cacaheute.client';
 
 @NgModule({
   declarations: [
@@ -38,9 +39,11 @@ import { AppComponent } from './app.component';
     FormsModule,
     MatListModule,
     MatTooltipModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule
   ],
   providers: [
+    CacaheuteClient
   ],
   bootstrap: [AppComponent]
 })
