@@ -18,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // All services are here
+import { GameService } from 'src/service/game.service';
 
 import { AppComponent } from './app.component';
 import { CacaheuteClient } from 'src/client/cacaheute.client';
@@ -43,7 +44,8 @@ import { CacaheuteClient } from 'src/client/cacaheute.client';
     HttpClientModule
   ],
   providers: [
-    CacaheuteClient
+    CacaheuteClient,
+    GameService
   ],
   bootstrap: [AppComponent]
 })

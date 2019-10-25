@@ -1,5 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { CacaheuteClient } from 'src/client/cacaheute.client';
+import { GameService } from 'src/service/game.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,16 @@ import { CacaheuteClient } from 'src/client/cacaheute.client';
 export class AppComponent implements OnInit {
   title = 'Cacaheute';
 
-  constructor(@Injectable() private client: CacaheuteClient) { }
+  constructor(@Injectable() public service: GameService, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
-    let result = await this.client.getServerStatus();
-    console.log(result);
+    const res = await this.service.initialize();
+    if (res.statusCode > 299) {
+      const ref = this.snackBar.open(res.message, 'Reconnect');
+      ref.onAction().subscribe(async () => { await this.ngOnInit(); });
+    } else {
+      this.snackBar.open('Server is online', '', { duration: 1000 });
+    }
   }
 }
 
