@@ -52,7 +52,7 @@ import { NavigationService } from 'src/service/nav.service';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'login', component: ConnectionComponent },
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'dashboard/:id', component: DashboardComponent },
       { path: '',   redirectTo: '/login', pathMatch: 'full' },
     ])
   ],

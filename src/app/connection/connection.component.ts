@@ -33,7 +33,6 @@ export class ConnectionComponent implements OnInit {
   }
 
   async onGoClicked(){
-    console.log(this.nameFomrControl.value);
     const res = await this.service.sendRequest(async ()=> {
       return await this.client.enterIn(this.emailFormControl.value, this.nameFomrControl.value);
     })
@@ -41,7 +40,7 @@ export class ConnectionComponent implements OnInit {
     if(res.statusCode > 299){
       this.service.showSnack(res.message);
     } else {
-      this.service.navService.goToDashboard();
+      this.service.navService.goToDashboard(res._id);
     }
   }
 }

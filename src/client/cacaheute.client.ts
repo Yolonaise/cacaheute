@@ -44,4 +44,12 @@ export class CacaheuteClient {
             return err.error ? err.error : err;
         }
     }
+
+    async getGames(userId: string) {
+        try {
+            return await this.client.get<User>(`${this.baseUrl}/game/byUser/${userId}`, { ...this.getHeaders() }).toPromise();
+        } catch (err) {
+            return err.error ? err.error : err;
+        }
+    }
 }

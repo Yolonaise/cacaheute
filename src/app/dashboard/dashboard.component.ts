@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { CacaheuteClient } from 'src/client/cacaheute.client';
+import User from 'cacaheute-objects/models/cacaheute.user';
+import Game from 'cacaheute-objects/models/cacaheute.game';
+import { GameService } from 'src/service/game.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +12,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  currentUser: User;
+  gamesClosed: Game[] = [];
+  gamesOnGoing: Game[] = [];
+  userGames: Game[] = [];
 
-  ngOnInit() {
+  constructor(private route: ActivatedRoute, private service: GameService, private client: CacaheuteClient) { }
+
+  async ngOnInit() {
+    let id = this.route.snapshot.paramMap.get('id');
+    let resU = await this.client.getUser(id);
+    if(resU.statusCode && resU.statusCode > 299) {
+      this.service.showActSnack('An error occured when loading user !', 'Retry', async () => {
+        await this.ngOnInit();
+      })
+    } else {
+      this.currentUser = resU as User;
+    }
+    
+    let resGs = await this.client.getGames(id);
+    if(resGs.statusCode > 299) {
+      this.service.showActSnack('An error occured when loading user !', 'Retry', async () => {
+        await this.ngOnInit();
+      })
+    } else {
+      (resGs as Game[]).forEach(g => {
+        if(g.admin == id)
+          this.userGames.push(g);
+        
+          this.gamesOnGoing.push(g);
+      });
+    }
   }
-
 }
