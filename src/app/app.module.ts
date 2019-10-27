@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
+import { RouterModule } from '@angular/router';
+
 // All materials components imports are here !
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -19,13 +21,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // All services are here
 import { GameService } from 'src/service/game.service';
+import { CacaheuteClient } from 'src/client/cacaheute.client';
 
 import { AppComponent } from './app.component';
-import { CacaheuteClient } from 'src/client/cacaheute.client';
+import { ConnectionComponent } from './connection/connection.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavigationService } from 'src/service/nav.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConnectionComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -41,11 +48,18 @@ import { CacaheuteClient } from 'src/client/cacaheute.client';
     MatListModule,
     MatTooltipModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      { path: 'login', component: ConnectionComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: '',   redirectTo: '/login', pathMatch: 'full' },
+    ])
   ],
   providers: [
     CacaheuteClient,
-    GameService
+    GameService,
+    NavigationService
   ],
   bootstrap: [AppComponent]
 })

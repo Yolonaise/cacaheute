@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import User from 'cacaheute-objects/models/cacaheute.user';
 @Injectable()
 export class CacaheuteClient {
@@ -20,6 +20,18 @@ export class CacaheuteClient {
     async getServerStatus() {
         try {
             return await this.client.get(`${this.baseUrl}/server`, { ...this.getHeaders() }).toPromise();
+        } catch (err) {
+            return err.error ? err.error : err;
+        }
+    }
+
+    async enterIn(email: string, name: string) {
+        try {
+            return await this.client.post<User>(`${this.baseUrl}/user/enterin`, {}, 
+                {
+                    ...this.getHeaders(), 
+                    params: new HttpParams().set('email', email).set('name', name) 
+                }).toPromise();
         } catch (err) {
             return err.error ? err.error : err;
         }

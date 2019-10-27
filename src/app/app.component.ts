@@ -1,6 +1,5 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { GameService } from 'src/service/game.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +7,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Cacaheute';
 
-  constructor(@Injectable() public service: GameService, private snackBar: MatSnackBar) { }
+  constructor(public service: GameService) { }
 
-  async ngOnInit() {
+  async ngAfterViewInit() {
     const res = await this.service.initialize();
     if (res.statusCode > 299) {
-      const ref = this.snackBar.open(res.message, 'Reconnect');
-      ref.onAction().subscribe(async () => { await this.ngOnInit(); });
+      this.service.showActSnack(res.message, 'Reconnect', async () => { await this.ngAfterViewInit(); } );
     } else {
-      this.snackBar.open('Server is online', '', { duration: 1000 });
+      this.service.showSnack('Server is online');
     }
   }
 }
