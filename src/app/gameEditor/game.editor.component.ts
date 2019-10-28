@@ -18,9 +18,15 @@ export class GameStateMatcher implements ErrorStateMatcher {
 })
 
 export class GameEditorComponent implements OnInit {
-  mode: string = "";
+  mode = '';
 
   nameFomrControl = new FormControl('', [
+    Validators.required
+  ]);
+  priceFomrControl = new FormControl('', [
+    Validators.required
+  ]);
+  dateFomrControl = new FormControl('', [
     Validators.required
   ]);
 

@@ -1,21 +1,48 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title><h3><b>{{ this.mode }}</b> game</h3></mat-card-title>
-        <mat-card-subtitle><h4>Here we built magic 💪</h4></mat-card-subtitle>
+        <mat-card-title>
+            <h3><b>{{ this.mode }}</b> game</h3>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <h4>Here we built magic 💪</h4>
+        </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <div class="w3-row">
-            <div class="w3-col m4 w3-margin">
-                <form class="example-form">
+            <form class="example-form">
+                <div class="w3-col m3 w3-margin">
                     <mat-form-field class="example-full-width">
-                        <input matInput ngModel placeholder="Name" [formControl]="this.nameFomrControl" [errorStateMatcher]="this.matcher">
-                        <mat-hint>New user ? enter a name 👍</mat-hint>
+                        <input matInput ngModel placeholder="Name" [formControl]="this.nameFomrControl"
+                            [errorStateMatcher]="this.matcher">
+                        <mat-hint>The event name</mat-hint>
                         <mat-error *ngIf="this.nameFomrControl.hasError('required')">
-                            Email is <strong>required</strong>
+                            Name event is <strong>required</strong>
                         </mat-error>
                     </mat-form-field>
-                </form>
-            </div>
+                </div>
+                <div class="w3-col m3 w3-margin">
+                    <mat-form-field class="example-full-width">
+                        <input type="number" matInput ngModel placeholder="Price" [formControl]="this.priceFomrControl"
+                            [errorStateMatcher]="this.matcher">
+                        <mat-hint>The average price of all gifts (in €)</mat-hint>
+                        <mat-error *ngIf="this.priceFomrControl.hasError('required')">
+                            Pirce is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="w3-col m3 w3-margin">
+                    <mat-form-field class="example-full-width">
+                        <input matInput [matDatepicker]="picker" ngModel placeholder="Date"
+                            [formControl]="this.dateFomrControl" [errorStateMatcher]="this.matcher">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-hint>The date of the event</mat-hint>
+                        <mat-error *ngIf="this.dateFomrControl.hasError('required')">
+                            Date event is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </form>
         </div>
     </mat-card-content>
     <mat-card-actions>

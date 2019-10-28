@@ -20,27 +20,27 @@ export class DashboardComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: GameService, private client: CacaheuteClient) { }
 
   async ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    let resU = await this.client.getUser(id);
-    if(resU.statusCode && resU.statusCode > 299) {
+    const id = this.route.snapshot.paramMap.get('id');
+    const resU = await this.client.getUser(id);
+    if (resU.statusCode && resU.statusCode > 299) {
       this.service.showActSnack('An error occured when loading user !', 'Retry', async () => {
         await this.ngOnInit();
-      })
+      });
     } else {
       this.currentUser = resU as User;
     }
-    
-    let resGs = await this.client.getGames(id);
-    if(resGs.statusCode > 299) {
+
+    const resGs = await this.client.getGames(id);
+    if (resGs.statusCode > 299) {
       this.service.showActSnack('An error occured when loading user !', 'Retry', async () => {
         await this.ngOnInit();
-      })
+      });
     } else {
       (resGs as Game[]).forEach(g => {
-        if(g.admin == id)
+        if (g.admin === id) {
           this.userGames.push(g);
-        
-          this.gamesOnGoing.push(g);
+        }
+        this.gamesOnGoing.push(g);
       });
     }
   }
