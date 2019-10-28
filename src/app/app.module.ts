@@ -30,13 +30,15 @@ import { ConnectionComponent } from './connection/connection.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavigationService } from 'src/service/nav.service';
 import { GameEditorComponent } from './gameEditor/game.editor.component';
+import { UserEditorComponent } from './user-editor/user-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConnectionComponent,
     DashboardComponent,
-    GameEditorComponent
+    GameEditorComponent,
+    UserEditorComponent
   ],
   imports: [
     BrowserModule,

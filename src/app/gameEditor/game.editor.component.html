@@ -44,9 +44,14 @@
                 </div>
             </form>
         </div>
+        <mat-divider></mat-divider>
+        <mat-list>
+            <app-user-editor *ngFor="let user of users; let index = index;" [user]="user.user" [gifts]="user.gifts"
+                [new]="user.new"></app-user-editor>
+        </mat-list>
     </mat-card-content>
     <mat-card-actions>
-        <!-- <button mat-stroked-button [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required')"
-                (click)="this.onGoClicked()">LET'S GO</button> -->
+        <button mat-stroked-button (click)="this.addUser()">add user
+            <b>{{ (this.users.length < this.minUsers) ?  '(remains ' + (this.minUsers - this.users.length) + ')' : '' }}</b></button>
     </mat-card-actions>
 </mat-card>

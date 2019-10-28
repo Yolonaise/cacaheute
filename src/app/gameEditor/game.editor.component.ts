@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import User from 'cacaheute-objects/models/cacaheute.user';
+import Gift from 'cacaheute-objects/models/cacaheute.gift';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class GameStateMatcher implements ErrorStateMatcher {
@@ -18,7 +20,10 @@ export class GameStateMatcher implements ErrorStateMatcher {
 })
 
 export class GameEditorComponent implements OnInit {
+  minUsers = 3;
   mode = '';
+  users: { user: User, gifts: Gift[], new: boolean }[] = [];
+  matcher = new GameStateMatcher();
 
   nameFomrControl = new FormControl('', [
     Validators.required
@@ -30,12 +35,13 @@ export class GameEditorComponent implements OnInit {
     Validators.required
   ]);
 
-  matcher = new GameStateMatcher();
-
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.mode = this.route.snapshot.paramMap.get('mode');
   }
 
+  addUser() {
+    this.users.push({ user: {}, gifts: [], new: true });
+  }
 }
