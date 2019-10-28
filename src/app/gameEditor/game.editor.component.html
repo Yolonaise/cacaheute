@@ -1,12 +1,25 @@
 <mat-card>
-        <mat-card-header>
-            <mat-card-title><h3><b>{{ this.mode }}</b> game</h3></mat-card-title>
-            <mat-card-subtitle><h4>Here we built magic 💪</h4></mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="w3-row">
-                <div class="w3-col m4">
-                </div>
+    <mat-card-header>
+        <mat-card-title><h3><b>{{ this.mode }}</b> game</h3></mat-card-title>
+        <mat-card-subtitle><h4>Here we built magic 💪</h4></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="w3-row">
+            <div class="w3-col m4 w3-margin">
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                        <input matInput ngModel placeholder="Name" [formControl]="this.nameFomrControl" [errorStateMatcher]="this.matcher">
+                        <mat-hint>New user ? enter a name 👍</mat-hint>
+                        <mat-error *ngIf="this.nameFomrControl.hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </form>
             </div>
-        </mat-card-content>
-    </mat-card>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <!-- <button mat-stroked-button [disabled]="emailFormControl.hasError('email') || emailFormControl.hasError('required')"
+                (click)="this.onGoClicked()">LET'S GO</button> -->
+    </mat-card-actions>
+</mat-card>
