@@ -44,10 +44,17 @@
                 </div>
             </form>
         </div>
-        <mat-divider></mat-divider>
+        <mat-divider mat-stroked-button> Delete </mat-divider>
         <mat-list>
-            <app-user-editor *ngFor="let user of users; let index = index;" [user]="user.user" [gifts]="user.gifts"
-                [new]="user.new"></app-user-editor>
+            <div class="w3-row" *ngFor="let user of users; let index = index;">
+                <div class="w3-col" style="width: 45px; height: 100%;">
+                    <button mat-button (click)="this.removeUser(index)">🗑️</button>
+                </div>
+                <div class="w3-rest">
+                    <app-user-editor [user]="user.user" [gifts]="user.gifts"
+                    [new]="user.new"></app-user-editor>
+                </div>
+            </div>
         </mat-list>
     </mat-card-content>
     <mat-card-actions>

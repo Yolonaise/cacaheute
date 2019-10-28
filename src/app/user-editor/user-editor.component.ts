@@ -21,16 +21,18 @@ export class UserStateMatcher implements ErrorStateMatcher {
 export class UserEditorComponent implements OnInit {
   matcher = new UserStateMatcher();
 
+  
+  @Input() user: User;
+  @Input() gifts: Gift[] = [];
+  @Input() new = true;
+  
   nameFomrControl = new FormControl('', [
     Validators.required
   ]);
   emailFomrControl = new FormControl('', [
-    Validators.required
+    Validators.required,
+    Validators.email,
   ]);
-
-  @Input() user: User;
-  @Input() gifts: Gift[] = [];
-  @Input() new = true;
 
   constructor() { }
 

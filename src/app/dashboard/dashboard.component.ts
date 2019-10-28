@@ -10,6 +10,7 @@ import { GameService } from 'src/service/game.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
+
 export class DashboardComponent implements OnInit {
 
   currentUser: User;
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
       });
     } else {
       this.currentUser = resU as User;
+      this.service.registerUser(this.currentUser);
     }
 
     const resGs = await this.client.getGames(id);
