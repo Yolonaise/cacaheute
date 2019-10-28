@@ -27,12 +27,14 @@ import { AppComponent } from './app.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavigationService } from 'src/service/nav.service';
+import { GameEditorComponent } from './gameEditor/game.editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConnectionComponent,
-    DashboardComponent
+    DashboardComponent,
+    GameEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,7 @@ import { NavigationService } from 'src/service/nav.service';
     RouterModule.forRoot([
       { path: 'login', component: ConnectionComponent },
       { path: 'dashboard/:id', component: DashboardComponent },
+      { path: 'game/:mode', component: GameEditorComponent },
       { path: '',   redirectTo: '/login', pathMatch: 'full' },
     ])
   ],
