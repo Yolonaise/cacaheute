@@ -44,12 +44,11 @@ export class GameEditorComponent implements OnInit {
     if(this.mode == 'create'){
       this.users.push({ user: this.service.registeredUser, gifts: [], new: false });
       this.admin = this.service.registeredUser._id;
-      console.log(this.admin);
     }
   }
 
   addUser() {
-    this.users.push({ user: { email: '', name: '', isRegistered: false}, gifts: [], new: true });
+    this.users.push({ user: { email: '', name: '', isRegistered: false, _id: ''}, gifts: [], new: true });
   }
 
   removeUser(index: number) {

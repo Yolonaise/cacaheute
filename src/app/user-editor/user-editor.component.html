@@ -1,9 +1,10 @@
-<form class="example-form" [attr.disabled]="!this.new">
+
+<form class="example-form">
     <div class="w3-row w3-margin">
         <div class="divider w3-col" [style.background]="this.new ? '#b2dfdb': '#ffecb3'"></div>
         <mat-form-field class="w3-col m2">
             <input matInput ngModel placeholder="Name" [formControl]="this.nameFomrControl"
-                [errorStateMatcher]="this.matcher" [(value)]="this.user.name">
+                [errorStateMatcher]="this.matcher" [(value)]="this.user.name" ng-disabled="!this.new">
             <mat-hint>User name</mat-hint>
             <mat-error *ngIf="this.nameFomrControl.hasError('required')">
                 Name is <strong>required</strong>

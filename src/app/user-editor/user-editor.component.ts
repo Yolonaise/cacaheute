@@ -21,7 +21,6 @@ export class UserStateMatcher implements ErrorStateMatcher {
 export class UserEditorComponent implements OnInit {
   matcher = new UserStateMatcher();
 
-  
   @Input() user: User;
   @Input() gifts: Gift[] = [];
   @Input() new = true;
@@ -37,5 +36,9 @@ export class UserEditorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if(!this.new){
+      this.nameFomrControl.disable();
+      this.emailFomrControl.disable();
+    }
   }
 }
