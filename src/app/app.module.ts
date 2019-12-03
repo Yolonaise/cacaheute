@@ -34,6 +34,7 @@ import { ConnectionComponent } from './connection/connection.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GameEditorComponent } from './gameEditor/game.editor.component';
 import { UserEditorComponent } from './user-editor/user-editor.component';
+import { WeatherService } from 'src/service/weather.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { UserEditorComponent } from './user-editor/user-editor.component';
     NavigationService,
     CookieService,
     UserService,
-    NotificationService
+    NotificationService,
+    WeatherService
   ],
   bootstrap: [AppComponent]
 })

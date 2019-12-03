@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CacaheuteClient } from 'src/client/cacaheute.client';
 import User from 'cacaheute-objects/models/cacaheute.user';
 import Game from 'cacaheute-objects/models/cacaheute.game';
-import { GameService } from 'src/service/game.service';
 import { UserService } from 'src/service/user.service';
-import { NavigationService } from 'src/service/nav.service';
 import { NotificationService } from 'src/service/notification.service';
+import { WeatherService } from 'src/service/weather.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,12 +20,15 @@ export class DashboardComponent implements OnInit {
   userGames: Game[] = [];
 
   constructor(
-    private route: ActivatedRoute,
     private client: CacaheuteClient,
     private user: UserService,
-    private notif: NotificationService) { }
+    private notif: NotificationService,
+    private weather: WeatherService) { }
 
   async ngOnInit() {
+    let res = await this.weather.getWeather('liege');
+    console.log(res);
+
     this.currentUser = await this.user.getUser();
     const resGs = await this.client.getGames(this.currentUser._id);
     if (resGs.statusCode > 299) {
