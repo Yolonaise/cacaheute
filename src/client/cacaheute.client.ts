@@ -4,7 +4,6 @@ import User from 'cacaheute-objects/models/cacaheute.user';
 @Injectable()
 export class CacaheuteClient {
     private baseUrl = 'https://tutonode.herokuapp.com';
-    //private baseUrl = 'http://localhost:4201';
     private apikey = 'MainApp484369541';
 
     constructor(private client: HttpClient) { }
@@ -27,10 +26,10 @@ export class CacaheuteClient {
 
     async enterIn(email: string, name: string) {
         try {
-            return await this.client.post<User>(`${this.baseUrl}/user/enterin`, {}, 
+            return await this.client.post<User>(`${this.baseUrl}/user/enterin`, {},
                 {
-                    ...this.getHeaders(), 
-                    params: new HttpParams().set('email', email).set('name', name) 
+                    ...this.getHeaders(),
+                    params: new HttpParams().set('email', email).set('name', name)
                 }).toPromise();
         } catch (err) {
             return err.error ? err.error : err;

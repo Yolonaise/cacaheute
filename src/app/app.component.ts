@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { GameService } from 'src/service/game.service';
+import { NotificationService } from 'src/service/notification.service';
+import { UserService } from 'src/service/user.service';
+import { NavigationService } from 'src/service/nav.service';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +13,18 @@ import { GameService } from 'src/service/game.service';
 export class AppComponent {
   title = 'Cacaheute';
 
-  constructor(public service: GameService) { }
+  constructor(public game: GameService, private notif: NotificationService, private user: UserService, private nav: NavigationService) { }
 
   async ngAfterViewInit() {
-    const res = await this.service.initialize();
+    const res = await this.game.initialize();
     if (res.statusCode > 299) {
-      this.service.showActSnack(res.message, 'Reconnect', async () => { await this.ngAfterViewInit(); } );
+      this.notif.showActSnack(res.message, 'Reconnect', async () => { await this.ngAfterViewInit(); });
     } else {
-      this.service.showSnack('Server is online');
+      this.notif.showSnack('Server is online');
+    }
+
+    if (!this.user.getStockedId() || this.user.getStockedId() === '') {
+      this.nav.gotToLogin();
     }
   }
 }

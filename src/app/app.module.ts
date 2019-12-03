@@ -23,12 +23,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // All services are here
 import { GameService } from 'src/service/game.service';
 import { CacaheuteClient } from 'src/client/cacaheute.client';
+import { CookieService } from 'ngx-cookie-service';
+import { UserService } from 'src/service/user.service';
+import { NotificationService } from 'src/service/notification.service';
+import { NavigationService } from 'src/service/nav.service';
 
 import { AppComponent } from './app.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ConnectionComponent } from './connection/connection.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavigationService } from 'src/service/nav.service';
 import { GameEditorComponent } from './gameEditor/game.editor.component';
 import { UserEditorComponent } from './user-editor/user-editor.component';
 
@@ -60,7 +63,7 @@ import { UserEditorComponent } from './user-editor/user-editor.component';
     MatNativeDateModule,
     RouterModule.forRoot([
       { path: 'login', component: ConnectionComponent },
-      { path: 'dashboard/:id', component: DashboardComponent },
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'game/:mode', component: GameEditorComponent },
       { path: '', redirectTo: '/login', pathMatch: 'full' },
     ])
@@ -68,7 +71,10 @@ import { UserEditorComponent } from './user-editor/user-editor.component';
   providers: [
     CacaheuteClient,
     GameService,
-    NavigationService
+    NavigationService,
+    CookieService,
+    UserService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

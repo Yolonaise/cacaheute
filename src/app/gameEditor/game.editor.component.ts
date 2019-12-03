@@ -5,6 +5,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import User from 'cacaheute-objects/models/cacaheute.user';
 import Gift from 'cacaheute-objects/models/cacaheute.gift';
 import { GameService } from 'src/service/game.service';
+import { UserService } from 'src/service/user.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class GameStateMatcher implements ErrorStateMatcher {
@@ -37,18 +38,19 @@ export class GameEditorComponent implements OnInit {
     Validators.required
   ]);
 
-  constructor(private route: ActivatedRoute, private service: GameService) { }
+  constructor(private route: ActivatedRoute, private game: GameService, private user: UserService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const currentUser = await this.user.getUser();
     this.mode = this.route.snapshot.paramMap.get('mode');
-    if(this.mode == 'create'){
-      this.users.push({ user: this.service.registeredUser, gifts: [], new: false });
-      this.admin = this.service.registeredUser._id;
+    if (this.mode === 'create') {
+      this.users.push({ user: currentUser, gifts: [], new: false });
+      this.admin = currentUser._id;
     }
   }
 
   addUser() {
-    this.users.push({ user: { email: '', name: '', isRegistered: false, _id: ''}, gifts: [], new: true });
+    this.users.push({ user: { email: '', name: '', isRegistered: false, _id: '' }, gifts: [], new: true });
   }
 
   removeUser(index: number) {

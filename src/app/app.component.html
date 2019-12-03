@@ -1,5 +1,5 @@
 <div>
-    <mat-progress-bar *ngIf="this.service.isLoading == true" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar *ngIf="this.game.isLoading == true" mode="indeterminate"></mat-progress-bar>
 
     <header class="w3-container">
         <div class="w3-bar w3-margin">
@@ -7,8 +7,7 @@
                 <img class="example-header-image" src="../assets/android-chrome-512x512.png"
                     matTooltip="The best way to do santa's job">
             </div>
-            <div class="w3-left w3-margin-left"
-                matTooltip="The name is a big mistake, but we endorse it">
+            <div class="w3-left w3-margin-left" matTooltip="The name is a big mistake, but we endorse it">
                 <p class="title">{{ title }}</p>
             </div>
         </div>

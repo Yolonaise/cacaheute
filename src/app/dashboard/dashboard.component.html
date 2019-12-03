@@ -3,28 +3,34 @@
 </div>
 <mat-card>
     <mat-card-header>
-        <mat-card-title><h3>Welcome <b>{{ this.currentUser.name }}</b></h3></mat-card-title>
-        <mat-card-subtitle><h4>This is the place in 🔥</h4></mat-card-subtitle>
+        <mat-card-title>
+            <h3>Welcome <b>{{ this.currentUser.name }}</b></h3>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <h4>This is the place in 🔥</h4>
+        </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <div class="w3-row">
             <div class="w3-col m4">
                 <mat-card>
                     <mat-card-title><b>Open</b> games 🙇‍♂️</mat-card-title>
-                    <mat-card-subtitle>There is still {{ this.gamesOnGoing.length }} events incomming</mat-card-subtitle>
-                </mat-card>    
+                    <mat-card-subtitle>There is still {{ this.gamesOnGoing.length }} events incomming
+                    </mat-card-subtitle>
+                </mat-card>
             </div>
             <div class="w3-col m4">
                 <mat-card>
                     <mat-card-title><b>Closed</b> games 🏆</mat-card-title>
                     <mat-card-subtitle>There is the {{ this.gamesClosed.length }} events out dated</mat-card-subtitle>
-                </mat-card>    
+                </mat-card>
             </div>
             <div class="w3-col m4">
                 <mat-card>
                     <mat-card-title><b>Your</b> games 👨‍🍳</mat-card-title>
-                    <mat-card-subtitle>There is the {{ this.userGames.length }} created by the best... YOU</mat-card-subtitle>
-                </mat-card>    
+                    <mat-card-subtitle>There is the {{ this.userGames.length }} created by the best... YOU
+                    </mat-card-subtitle>
+                </mat-card>
             </div>
         </div>
     </mat-card-content>
