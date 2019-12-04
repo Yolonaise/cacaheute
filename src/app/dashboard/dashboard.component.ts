@@ -26,8 +26,8 @@ export class DashboardComponent implements OnInit {
     private weather: WeatherService) { }
 
   async ngOnInit() {
-    let res = await this.weather.getWeather('liege');
-    console.log(res);
+    await this.weather.getWeather('liege');
+    console.log(this.weather.formatString());
 
     this.currentUser = await this.user.getUser();
     const resGs = await this.client.getGames(this.currentUser._id);
