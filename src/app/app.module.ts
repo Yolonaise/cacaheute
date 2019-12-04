@@ -66,7 +66,7 @@ import { WeatherService } from 'src/service/weather.service';
       { path: 'login', component: ConnectionComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'game/:mode', component: GameEditorComponent },
-      { path: '', redirectTo: '/login', pathMatch: 'full' },
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     ])
   ],
   providers: [

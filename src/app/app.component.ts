@@ -22,8 +22,8 @@ export class AppComponent {
     } else {
       this.notif.showSnack('Server is online');
     }
-
-    if (!this.user.getStockedId() || this.user.getStockedId() === '') {
+    const cookieId = this.user.getStockedId();
+    if (!cookieId || cookieId === '') {
       this.nav.gotToLogin();
     }
   }
