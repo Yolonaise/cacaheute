@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { IWeather, IResponse, Emojies } from 'src/banks/weather.banks';
+import { catchError } from 'rxjs/operators';
+import { IResponse, Emojies } from 'src/banks/weather.banks';
 
 const OPEN_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?q=';
 const OPEN_WEATHER_KEY = '8e5d28fb92e3901b49bb11069943404d';
@@ -29,7 +29,7 @@ export class WeatherService {
             return 'no weather yet';
         }
 
-        return `${this.currentWeather.name} : ${Emojies[this.currentWeather.weather[0].icon]} (${this.currentWeather.main.temp})`;
+        return `${this.currentWeather.name}: ${Emojies[this.currentWeather.weather[0].icon]} (${this.currentWeather.main.temp})`;
     }
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

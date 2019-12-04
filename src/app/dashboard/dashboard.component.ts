@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
   gamesOnGoing: Game[] = [];
   userGames: Game[] = [];
 
+  weatherTitle: string;
+
   constructor(
     private client: CacaheuteClient,
     private user: UserService,
@@ -27,7 +29,7 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit() {
     await this.weather.getWeather('liege');
-    console.log(this.weather.formatString());
+    this.weatherTitle = this.weather.formatString();
 
     this.currentUser = await this.user.getUser();
     const resGs = await this.client.getGames(this.currentUser._id);
