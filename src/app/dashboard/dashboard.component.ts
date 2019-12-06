@@ -5,6 +5,7 @@ import Game from 'cacaheute-objects/models/cacaheute.game';
 import { UserService } from 'src/service/user.service';
 import { NotificationService } from 'src/service/notification.service';
 import { WeatherService } from 'src/service/weather.service';
+import { IResponse, Emojies } from 'src/banks/weather.banks';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit {
   gamesOnGoing: Game[] = [];
   userGames: Game[] = [];
 
-  weatherTitle: string;
+  currentWeather: IResponse;
 
   constructor(
     private client: CacaheuteClient,
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit() {
     await this.weather.getWeather('liege');
-    this.weatherTitle = this.weather.formatString();
+    this.currentWeather = this.weather.getCurrentWeather();
 
     this.currentUser = await this.user.getUser();
     const resGs = await this.client.getGames(this.currentUser._id);
@@ -45,5 +46,13 @@ export class DashboardComponent implements OnInit {
         this.gamesOnGoing.push(g);
       });
     }
+  }
+
+  getWeatherIcon() {
+    if (this.currentWeather) {
+      return Emojies[this.currentWeather.weather[0].icon];
+    }
+
+    return '';
   }
 }

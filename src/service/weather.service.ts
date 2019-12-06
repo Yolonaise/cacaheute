@@ -24,12 +24,8 @@ export class WeatherService {
         }
     }
 
-    formatString() {
-        if (!this.currentWeather) {
-            return 'no weather yet';
-        }
-
-        return `${this.currentWeather.name}: ${Emojies[this.currentWeather.weather[0].icon]} (${this.currentWeather.main.temp})`;
+    getCurrentWeather(): IResponse | null {
+        return this.currentWeather;
     }
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

@@ -1,17 +1,11 @@
-<div class="w3-margin">
-    <mat-card>
-        <mat-card-header>
-            <h4>{{ weatherTitle }}</h4>
-        </mat-card-header>
-    </mat-card>
-</div>
 <mat-card>
     <mat-card-header>
         <mat-card-title>
             <h3>Welcome <b>{{ this.currentUser.name }}</b></h3>
+            <h4><i> weather at <b>{{ currentWeather.name }}</b></i></h4>
         </mat-card-title>
         <mat-card-subtitle>
-            <h4>This is the place in 🔥</h4>
+            <h4><b> {{ currentWeather.main.temp }} C°</b>{{ getWeatherIcon() }} </h4>
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
