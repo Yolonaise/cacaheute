@@ -13,7 +13,9 @@ export class UserService {
     }
 
     setStockedId(userId: string) {
-        this.cookie.set(CURRENT_USER_ID, userId);
+        const expiredDate = new Date();
+        expiredDate.setDate(expiredDate.getDate() + 7);
+        this.cookie.set(CURRENT_USER_ID, userId, expiredDate);
     }
 
     async getUser(): Promise<any> {
