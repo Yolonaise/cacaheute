@@ -18,6 +18,8 @@ export class WeatherService {
             this.currentWeather = await this.http.get(
                 `${OPEN_WEATHER_URL}${city}&APPID=${OPEN_WEATHER_KEY}&units=${OPEN_WEATHER_METRICS}&lang=${OPEN_WEATHER_LANG}`
             ).toPromise() as IResponse;
+
+            return this.currentWeather;
         } catch (err) {
             catchError(this.handleError('getWeather', []));
             return {};

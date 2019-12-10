@@ -27,6 +27,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserService } from 'src/service/user.service';
 import { NotificationService } from 'src/service/notification.service';
 import { NavigationService } from 'src/service/nav.service';
+import { OutlookService } from 'src/service/outlook.service';
 
 import { AppComponent } from './app.component';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -35,6 +36,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GameEditorComponent } from './gameEditor/game.editor.component';
 import { UserEditorComponent } from './user-editor/user-editor.component';
 import { WeatherService } from 'src/service/weather.service';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { WeatherService } from 'src/service/weather.service';
     HttpClientModule,
     ReactiveFormsModule,
     MatNativeDateModule,
+    OAuthModule.forRoot(),
     RouterModule.forRoot([
       { path: 'login', component: ConnectionComponent },
       { path: 'dashboard', component: DashboardComponent },
@@ -76,7 +79,8 @@ import { WeatherService } from 'src/service/weather.service';
     CookieService,
     UserService,
     NotificationService,
-    WeatherService
+    WeatherService,
+    OutlookService
   ],
   bootstrap: [AppComponent]
 })

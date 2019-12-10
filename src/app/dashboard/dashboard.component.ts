@@ -6,6 +6,7 @@ import { UserService } from 'src/service/user.service';
 import { NotificationService } from 'src/service/notification.service';
 import { WeatherService } from 'src/service/weather.service';
 import { IResponse, Emojies } from 'src/banks/weather.banks';
+import { OutlookService } from 'src/service/outlook.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,29 +24,16 @@ export class DashboardComponent implements OnInit {
   currentWeather: IResponse;
 
   constructor(
-    private client: CacaheuteClient,
     private user: UserService,
-    private notif: NotificationService,
-    private weather: WeatherService) { }
+    private weather: WeatherService,
+    private outlook: OutlookService) { }
 
   async ngOnInit() {
-    await this.weather.getWeather('liege');
-    this.currentWeather = this.weather.getCurrentWeather();
-
+    this.currentWeather = await this.weather.getWeather('liege');
     this.currentUser = await this.user.getUser();
-    const resGs = await this.client.getGames(this.currentUser._id);
-    if (resGs.statusCode > 299) {
-      this.notif.showActSnack('An error occured when loading user !', 'Retry', async () => {
-        await this.ngOnInit();
-      });
-    } else {
-      (resGs as Game[]).forEach(g => {
-        if (g.admin === this.currentUser._id) {
-          this.userGames.push(g);
-        }
-        this.gamesOnGoing.push(g);
-      });
-    }
+
+    this.outlook.configure();
+    console.log(this.outlook.getAccessToken());
   }
 
   getWeatherIcon() {
@@ -54,5 +42,18 @@ export class DashboardComponent implements OnInit {
     }
 
     return '';
+  }
+
+  register() {
+    this.outlook.register();
+  }
+
+  unRegister() {
+    this.outlook.unRegister();
+  }
+
+  identity() {
+    const claims = this.outlook.getIdentityClaims();
+    console.log(claims);
   }
 }

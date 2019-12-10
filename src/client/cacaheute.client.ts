@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import User from 'cacaheute-objects/models/cacaheute.user';
 @Injectable()
 export class CacaheuteClient {

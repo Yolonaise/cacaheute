@@ -3,6 +3,7 @@ import { GameService } from 'src/service/game.service';
 import { NotificationService } from 'src/service/notification.service';
 import { UserService } from 'src/service/user.service';
 import { NavigationService } from 'src/service/nav.service';
+import { OutlookService } from 'src/service/outlook.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,11 @@ import { NavigationService } from 'src/service/nav.service';
 export class AppComponent {
   title = 'Cacaheute';
 
-  constructor(public game: GameService, private notif: NotificationService, private user: UserService, private nav: NavigationService) { }
+  constructor(
+    public game: GameService,
+    private notif: NotificationService,
+    private user: UserService,
+    private nav: NavigationService) { }
 
   async ngAfterViewInit() {
     const res = await this.game.initialize();
