@@ -64,7 +64,13 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     HttpClientModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    OAuthModule.forRoot(),
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: ['https://graph.microsoft.com'],
+        sendAccessToken: true
+      }
+    }
+    ),
     RouterModule.forRoot([
       { path: 'login', component: ConnectionComponent },
       { path: 'dashboard', component: DashboardComponent },

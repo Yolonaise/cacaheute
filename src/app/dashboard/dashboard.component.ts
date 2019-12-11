@@ -29,11 +29,12 @@ export class DashboardComponent implements OnInit {
     private outlook: OutlookService) { }
 
   async ngOnInit() {
+    console.log('yolo');
     this.currentWeather = await this.weather.getWeather('liege');
     this.currentUser = await this.user.getUser();
 
     this.outlook.configure();
-    console.log(this.outlook.getAccessToken());
+    console.log(this.outlook.getTasks());
   }
 
   getWeatherIcon() {
