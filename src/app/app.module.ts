@@ -36,7 +36,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GameEditorComponent } from './gameEditor/game.editor.component';
 import { UserEditorComponent } from './user-editor/user-editor.component';
 import { WeatherService } from 'src/service/weather.service';
-import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -64,13 +63,6 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     HttpClientModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    OAuthModule.forRoot({
-      resourceServer: {
-        allowedUrls: ['https://graph.microsoft.com'],
-        sendAccessToken: true
-      }
-    }
-    ),
     RouterModule.forRoot([
       { path: 'login', component: ConnectionComponent },
       { path: 'dashboard', component: DashboardComponent },

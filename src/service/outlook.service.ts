@@ -1,76 +1,56 @@
-import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
-import { CookieService } from 'ngx-cookie-service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserAgentApplication } from 'msal';
+import { ImplicitMSALAuthenticationProvider } from '@microsoft/microsoft-graph-client/lib/src/ImplicitMSALAuthenticationProvider';
+import { MSALAuthenticationProviderOptions } from '@microsoft/microsoft-graph-client/lib/src/MSALAuthenticationProviderOptions';
+import { Client } from '@microsoft/microsoft-graph-client/lib/src/Client';
+import * as MicrosoftGraph from '@microsoft/microsoft-graph-types';
+import * as MicrosoftGraphBeta from '@microsoft/microsoft-graph-types-beta';
+import { NotificationService } from './notification.service';
 
-const config: AuthConfig = {
-    issuer: 'https://login.microsoftonline.com/consumers/v2.0',
-    redirectUri: `${window.location.origin}/dashboard`,
-    clientId: '30b065cf-040e-4cb2-997a-b6ed4e3d9b7a',
-    scope: 'openid',
-    strictDiscoveryDocumentValidation: false,
-    skipIssuerCheck: true,
-    // dummyClientSecret: 'bm6DA?w-=ru85bm@Vag6-Igc9lDxTrq.',
+const msalConfig = {
+    auth: {
+        clientId: 'edbdc53a-acae-4b85-a3e5-f0b0e31ae04d',
+        redirectUri: `${window.location.origin}/dashboard`,
+    },
 };
+const graphScopes = ['user.read', 'tasks.read'];
 
-const ACCESS_TOKEN = 'access_token';
-const GRAPH_URL = 'https://graph.microsoft.com';
 
 export class OutlookService {
+    private client: Client;
 
-    constructor(private oauth: OAuthService, private client: HttpClient, private cookie: CookieService) { }
+    constructor(private notif: NotificationService) {
+        const msalApplication = new UserAgentApplication(msalConfig);
+        const options = new MSALAuthenticationProviderOptions(graphScopes);
+        const authProvider = new ImplicitMSALAuthenticationProvider(msalApplication, options);
 
-    private getHeaders(): HttpHeaders {
-        let headers = new HttpHeaders();
-        headers = headers.append('Authorization', 'Bearer ' + this.oauth.getAccessToken());
-
-        return headers;
-
-    }
-    setAccessToken(token: string) {
-        return this.cookie.set(ACCESS_TOKEN, token);
-    }
-
-    getAccessToken(): string {
-        return this.cookie.get(ACCESS_TOKEN);
+        const options2 = {
+            authProvider, // An instance created from previous step
+        };
+        this.client = Client.initWithMiddleware(options2);
     }
 
-    register() {
+    async getMe(): Promise<MicrosoftGraphBeta.User | null> {
         try {
-            this.oauth.initLoginFlow();
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    unRegister() {
-        try {
-            this.oauth.logOut();
-        } catch (err) {
-            console.log(err);
-        }
-    }
-    configure() {
-        this.oauth.configure(config);
-        this.oauth.tokenValidationHandler = new JwksValidationHandler();
-        this.oauth.loadDiscoveryDocumentAndTryLogin();
-    }
-
-    async getTasks(): Promise<any> {
-        try {
-            return await this.client.get(
-                `${GRAPH_URL}/beta/me/outlook/tasks`,
-                { headers: this.getHeaders() }).toPromise();
-        } catch (err) {
-            console.log(err);
+            return await this.client
+                .api('/me')
+                .version('beta')
+                .get() as MicrosoftGraphBeta.User;
+        } catch (error) {
+            this.notif.showSnack(error);
             return null;
         }
     }
 
-    public getIdentityClaims() {
-        const claims = this.oauth.getIdentityClaims();
-        if (!claims) {
+    async getTasks(): Promise<[MicrosoftGraphBeta.OutlookTask] | null> {
+        try {
+            const response = await this.client
+                .api('/me/outlook/tasks')
+                .version('beta')
+                .get();
+            return response.value;
+        } catch (error) {
+            this.notif.showSnack(error);
             return null;
         }
-        return claims;
     }
 }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CacaheuteClient } from 'src/client/cacaheute.client';
 import User from 'cacaheute-objects/models/cacaheute.user';
 import Game from 'cacaheute-objects/models/cacaheute.game';
 import { UserService } from 'src/service/user.service';
-import { NotificationService } from 'src/service/notification.service';
 import { WeatherService } from 'src/service/weather.service';
 import { IResponse, Emojies } from 'src/banks/weather.banks';
 import { OutlookService } from 'src/service/outlook.service';
@@ -32,9 +30,6 @@ export class DashboardComponent implements OnInit {
     console.log('yolo');
     this.currentWeather = await this.weather.getWeather('liege');
     this.currentUser = await this.user.getUser();
-
-    this.outlook.configure();
-    console.log(this.outlook.getTasks());
   }
 
   getWeatherIcon() {
@@ -45,16 +40,19 @@ export class DashboardComponent implements OnInit {
     return '';
   }
 
-  register() {
-    this.outlook.register();
+  async register() {
+    console.log('try login');
+    const me = await this.outlook.getMe();
+    const tasks = await this.outlook.getTasks();
+
+    console.log(me.surname);
+    console.log(tasks);
+    tasks.forEach((v, i) => {
+      console.log(v.subject);
+    });
   }
 
   unRegister() {
-    this.outlook.unRegister();
-  }
 
-  identity() {
-    const claims = this.outlook.getIdentityClaims();
-    console.log(claims);
   }
 }
