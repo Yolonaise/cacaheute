@@ -35,12 +35,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ConnectionComponent } from './connection/connection.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressInterceptor } from 'src/interceptors/progress.interceptor';
+import { MainTasksComponent } from './main-tasks/main-tasks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConnectionComponent,
     DashboardComponent,
+    MainTasksComponent,
   ],
   imports: [
     BrowserModule,

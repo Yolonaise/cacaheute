@@ -13,7 +13,7 @@ const msalConfig = {
         redirectUri: `${window.location.origin}/dashboard`,
     },
 };
-const graphScopes = ['user.read', 'tasks.read'];
+const graphScopes = ['user.read', 'tasks.read', 'tasks.readwrite'];
 
 
 export class OutlookService {
@@ -58,6 +58,22 @@ export class OutlookService {
                 .version('beta')
                 .get();
             return response.value;
+        } catch (error) {
+            this.notif.showSnack(error);
+            return null;
+        } finally {
+            this.progress.hide();
+        }
+    }
+
+    async completeTask(task: MicrosoftGraphBeta.OutlookTask): Promise<MicrosoftGraphBeta.OutlookTask | null> {
+        this.progress.show();
+        try {
+            const response = await this.client
+                .api(`/me/outlook/tasks/${task.id}/complete`)
+                .version('beta')
+                .post({});
+            return response.value[0];
         } catch (error) {
             this.notif.showSnack(error);
             return null;

@@ -9,29 +9,12 @@
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <div class="w3-row">
+        <div *ngIf="!this.me" class="w3-row">
             <button mat-button (click)="this.register()">Login</button>
             <button mat-button (click)="this.unRegister()">logout</button>
         </div>
-        <div class="w3-row">
-            <div class="w3-col m4">
-                <mat-card>
-                    <mat-card-title><b>Open</b> games 🙇‍♂️</mat-card-title>
-                    <mat-card-subtitle></mat-card-subtitle>
-                </mat-card>
-            </div>
-            <div class="w3-col m4">
-                <mat-card>
-                    <mat-card-title><b>Closed</b> games 🏆</mat-card-title>
-                    <mat-card-subtitle></mat-card-subtitle>
-                </mat-card>
-            </div>
-            <div class="w3-col m4">
-                <mat-card>
-                    <mat-card-title><b>Your</b> games 👨‍🍳</mat-card-title>
-                    <mat-card-subtitle></mat-card-subtitle>
-                </mat-card>
-            </div>
+        <div *ngIf="this.me" class="w3-row">
+           <app-main-tasks></app-main-tasks>
         </div>
     </mat-card-content>
 </mat-card>

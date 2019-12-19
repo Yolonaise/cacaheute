@@ -1,0 +1,33 @@
+<div class="w3-col m4">
+    <mat-card>
+        <mat-card-title><b>Today</b> Tasks 🙇‍♂️</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <mat-card-content>
+            <div *ngFor="let t of dayTasks; let i = index">
+                <button mat-button (click)='completeTask(i)'>{{t.status === 'completed' ? '✔️' : '❌' }}<b>  {{t.subject}} </b> <i>  {{t.assignedTo}}</i></button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="w3-col m4">
+    <mat-card>
+        <mat-card-title><b>Closed</b> Tasks 🏆</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <mat-card-content>
+            <div *ngFor="let t of dayTasks">
+                <mat-card-subtitle>{{t.subject}}</mat-card-subtitle>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="w3-col m4">
+    <mat-card>
+        <mat-card-title><b>Incoming</b> Tasks 👨‍🍳</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+        <mat-card-content>
+            <div *ngFor="let t of dayTasks">
+                <mat-card-subtitle>{{t.subject}}</mat-card-subtitle>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
