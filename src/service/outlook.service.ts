@@ -5,6 +5,7 @@ import { Client } from '@microsoft/microsoft-graph-client/lib/src/Client';
 import * as MicrosoftGraph from '@microsoft/microsoft-graph-types';
 import * as MicrosoftGraphBeta from '@microsoft/microsoft-graph-types-beta';
 import { NotificationService } from './notification.service';
+import { ProgressService } from './progress.service';
 
 const msalConfig = {
     auth: {
@@ -16,32 +17,41 @@ const graphScopes = ['user.read', 'tasks.read'];
 
 
 export class OutlookService {
+    private isConnected: boolean;
     private client: Client;
-
-    constructor(private notif: NotificationService) {
+    
+    constructor(private notif: NotificationService, private progress: ProgressService) {
         const msalApplication = new UserAgentApplication(msalConfig);
         const options = new MSALAuthenticationProviderOptions(graphScopes);
         const authProvider = new ImplicitMSALAuthenticationProvider(msalApplication, options);
-
+        
         const options2 = {
             authProvider, // An instance created from previous step
         };
         this.client = Client.initWithMiddleware(options2);
+        this.isConnected = false;
     }
 
     async getMe(): Promise<MicrosoftGraphBeta.User | null> {
+        this.progress.show();
         try {
-            return await this.client
+            const result = await this.client
                 .api('/me')
                 .version('beta')
                 .get() as MicrosoftGraphBeta.User;
+
+            this.isConnected = result !== null;
+            return result;
         } catch (error) {
             this.notif.showSnack(error);
             return null;
+        } finally {
+            this.progress.hide();
         }
     }
 
     async getTasks(): Promise<[MicrosoftGraphBeta.OutlookTask] | null> {
+        this.progress.show();
         try {
             const response = await this.client
                 .api('/me/outlook/tasks')
@@ -51,6 +61,8 @@ export class OutlookService {
         } catch (error) {
             this.notif.showSnack(error);
             return null;
+        } finally {
+            this.progress.hide();
         }
     }
 }

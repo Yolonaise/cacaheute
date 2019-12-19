@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { GameService } from 'src/service/game.service';
 import { CacaheuteClient } from 'src/client/cacaheute.client';
 import { NotificationService } from 'src/service/notification.service';
 import { UserService } from 'src/service/user.service';
+import { NavigationService } from 'src/service/nav.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -29,20 +29,22 @@ export class ConnectionComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private game: GameService, private client: CacaheuteClient, private notif: NotificationService, private user: UserService) { }
+  constructor(
+    private client: CacaheuteClient,
+    private notif: NotificationService,
+    private user: UserService, 
+    private nav: NavigationService) { }
 
   ngOnInit() {
   }
 
   async onGoClicked() {
-    const res = await this.game.sendRequest(async () => {
-      return await this.client.enterIn(this.emailFormControl.value, this.nameFomrControl.value);
-    });
+    const res = await this.client.enterIn(this.emailFormControl.value, this.nameFomrControl.value);
     if (res.statusCode > 299) {
       this.notif.showSnack(res.message);
     } else {
       this.user.setStockedId(res._id);
-      this.game.navService.goToDashboard();
+      this.nav.goToDashboard();
     }
   }
 }

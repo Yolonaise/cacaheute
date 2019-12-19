@@ -15,10 +15,6 @@ import { OutlookService } from 'src/service/outlook.service';
 export class DashboardComponent implements OnInit {
 
   currentUser: User;
-  gamesClosed: Game[] = [];
-  gamesOnGoing: Game[] = [];
-  userGames: Game[] = [];
-
   currentWeather: IResponse;
 
   constructor(
@@ -27,7 +23,6 @@ export class DashboardComponent implements OnInit {
     private outlook: OutlookService) { }
 
   async ngOnInit() {
-    console.log('yolo');
     this.currentWeather = await this.weather.getWeather('liege');
     this.currentUser = await this.user.getUser();
   }
@@ -41,18 +36,14 @@ export class DashboardComponent implements OnInit {
   }
 
   async register() {
-    console.log('try login');
     const me = await this.outlook.getMe();
     const tasks = await this.outlook.getTasks();
-
-    console.log(me.surname);
-    console.log(tasks);
+    
     tasks.forEach((v, i) => {
       console.log(v.subject);
     });
   }
 
   unRegister() {
-
   }
 }

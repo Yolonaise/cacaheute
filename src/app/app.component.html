@@ -1,5 +1,5 @@
 <div>
-    <mat-progress-bar *ngIf="this.game.isLoading == true" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar *ngIf="isLoading | async" mode="indeterminate"></mat-progress-bar>
 
     <header class="w3-container">
         <div class="w3-bar w3-margin">
