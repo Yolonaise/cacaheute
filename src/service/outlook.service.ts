@@ -6,6 +6,7 @@ import * as MicrosoftGraph from '@microsoft/microsoft-graph-types';
 import * as MicrosoftGraphBeta from '@microsoft/microsoft-graph-types-beta';
 import { NotificationService } from './notification.service';
 import { ProgressService } from './progress.service';
+import { Injectable } from '@angular/core';
 
 const msalConfig = {
     auth: {
@@ -15,16 +16,16 @@ const msalConfig = {
 };
 const graphScopes = ['user.read', 'tasks.read', 'tasks.readwrite'];
 
-
+@Injectable()
 export class OutlookService {
     private isConnected: boolean;
     private client: Client;
-    
+
     constructor(private notif: NotificationService, private progress: ProgressService) {
         const msalApplication = new UserAgentApplication(msalConfig);
         const options = new MSALAuthenticationProviderOptions(graphScopes);
         const authProvider = new ImplicitMSALAuthenticationProvider(msalApplication, options);
-        
+
         const options2 = {
             authProvider, // An instance created from previous step
         };

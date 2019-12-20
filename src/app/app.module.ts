@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router';
 
 // All materials components imports are here !
 import { MatButtonModule } from '@angular/material/button';
@@ -37,6 +37,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressInterceptor } from 'src/interceptors/progress.interceptor';
 import { MainTasksComponent } from './main-tasks/main-tasks.component';
 
+const routes: Routes = [
+  { path: 'login', component: ConnectionComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +51,7 @@ import { MainTasksComponent } from './main-tasks/main-tasks.component';
     MainTasksComponent,
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -62,23 +69,19 @@ import { MainTasksComponent } from './main-tasks/main-tasks.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    RouterModule.forRoot([
-      { path: 'login', component: ConnectionComponent },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-    ])
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ProgressInterceptor, multi: true },
     CacaheuteClient,
-    NavigationService,
     CookieService,
+    NavigationService,
     UserService,
     NotificationService,
     WeatherService,
     OutlookService,
     ProgressService,
-    { provide: HTTP_INTERCEPTORS, useClass: ProgressInterceptor, multi: true }
   ],
+  exports: [RouterModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

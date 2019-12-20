@@ -2,7 +2,9 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable } from 'rxjs';
 import { ProgressService } from 'src/service/progress.service';
 import { finalize } from 'rxjs/operators';
+import { Inject, Injectable } from '@angular/core';
 
+@Injectable()
 export class ProgressInterceptor implements HttpInterceptor {
     constructor(public loaderService: ProgressService) { }
 

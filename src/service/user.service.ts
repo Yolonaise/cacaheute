@@ -1,9 +1,11 @@
 import { NavigationService } from './nav.service';
 import { CookieService } from 'ngx-cookie-service';
 import { CacaheuteClient } from 'src/client/cacaheute.client';
+import { Injectable } from '@angular/core';
 
 const CURRENT_USER_ID = 'CurrentUserId';
 
+@Injectable()
 export class UserService {
 
     constructor(private nav: NavigationService, private cookie: CookieService, private client: CacaheuteClient) { }
