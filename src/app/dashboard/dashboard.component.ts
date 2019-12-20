@@ -15,7 +15,6 @@ import { OutlookService } from 'src/service/outlook.service';
 export class DashboardComponent implements OnInit {
 
   currentUser: User;
-  currentWeather: IResponse;
   me: MicrosoftGraphBeta.User;
   tasks: MicrosoftGraphBeta.OutlookTask[];
 
@@ -25,16 +24,8 @@ export class DashboardComponent implements OnInit {
     private outlook: OutlookService) { }
 
   async ngOnInit() {
-    this.currentWeather = await this.weather.getWeather('liege');
     this.currentUser = await this.user.getUser();
     await this.register();
-  }
-
-  getWeatherIcon() {
-    if (this.currentWeather) 
-      return Emojies[this.currentWeather.weather[0].icon];
-
-    return '';
   }
 
   async register() {

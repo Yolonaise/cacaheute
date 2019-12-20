@@ -38,6 +38,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressInterceptor } from 'src/interceptors/progress.interceptor';
 import { MainTasksComponent } from './main-tasks/main-tasks.component';
 import { FolderComponent } from './folder/folder.component';
+import { MainMeteoComponent } from './main-meteo/main-meteo.component';
 
 const routes: Routes = [
   { path: 'login', component: ConnectionComponent },
@@ -52,6 +53,7 @@ const routes: Routes = [
     DashboardComponent,
     MainTasksComponent,
     FolderComponent,
+    MainMeteoComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

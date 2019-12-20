@@ -1,15 +1,16 @@
-<div>
-    <mat-progress-bar *ngIf="isLoading | async" mode="indeterminate"></mat-progress-bar>
-
+<div class="bg" style="height:100%; padding: 0; margin: 0;">
+    <mat-progress-bar w3-display-topleft *ngIf="isLoading | async" mode="indeterminate" style="position: fixed;">
+    </mat-progress-bar>
     <header class="w3-container">
-        <div class="w3-bar w3-margin">
-            <div class="w3-left">
-                <img class="example-header-image" src="../assets/android-chrome-512x512.png"
-                    matTooltip="The best way to do santa's job">
-            </div>
-            <div class="w3-left w3-margin-left" matTooltip="The name is a big mistake, but we endorse it">
-                <p class="title">{{ title }}</p>
-            </div>
+        <div class="w3-right">
+            <app-main-meteo></app-main-meteo>
+        </div>
+        <div class="w3-left">
+            <img class="example-header-image" src="../assets/android-chrome-512x512.png"
+                matTooltip="The best way to do santa's job">
+        </div>
+        <div class="w3-center" matTooltip="The name is a big mistake, but we endorse it">
+            <p class="title">{{ title }}</p>
         </div>
     </header>
 

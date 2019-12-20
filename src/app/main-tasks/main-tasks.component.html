@@ -1,4 +1,4 @@
-<mat-grid-list cols="{{folders.length}}" rowHeight="1:1">
+<mat-grid-list [cols]="folders.length" rowHeight="1:1">
     <mat-grid-tile *ngFor="let f of folders">
         <mat-grid-tile-header style="background-color: transparent;">
             <mat-card-subtitle><b>{{f.name}}</b></mat-card-subtitle>
