@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OutlookService } from 'src/service/outlook.service';
-import { OutlookTask } from '@microsoft/microsoft-graph-types-beta';
+import { OutlookTaskFolder } from '@microsoft/microsoft-graph-types-beta';
 
 @Component({
   selector: 'app-main-tasks',
@@ -8,16 +8,12 @@ import { OutlookTask } from '@microsoft/microsoft-graph-types-beta';
   styleUrls: ['./main-tasks.component.scss']
 })
 export class MainTasksComponent implements OnInit {
-  dayTasks: OutlookTask[];
+  folders: OutlookTaskFolder[];
 
   constructor(private outlook: OutlookService) { }
 
   async ngOnInit() {
-    this.dayTasks = await this.outlook.getTasks();
-    console.log(this.dayTasks);
-  }
-
-  async completeTask(i: number){
-    this.dayTasks[i] = await this.outlook.completeTask(this.dayTasks[i]);
+    this.folders = await this.outlook.getFolders();
+    console.log(this.folders);
   }
 }

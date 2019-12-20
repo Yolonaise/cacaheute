@@ -36,6 +36,7 @@ import { ConnectionComponent } from './connection/connection.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressInterceptor } from 'src/interceptors/progress.interceptor';
 import { MainTasksComponent } from './main-tasks/main-tasks.component';
+import { FolderComponent } from './folder/folder.component';
 
 const routes: Routes = [
   { path: 'login', component: ConnectionComponent },
@@ -49,6 +50,7 @@ const routes: Routes = [
     ConnectionComponent,
     DashboardComponent,
     MainTasksComponent,
+    FolderComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

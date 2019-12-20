@@ -2,8 +2,7 @@ import { UserAgentApplication } from 'msal';
 import { ImplicitMSALAuthenticationProvider } from '@microsoft/microsoft-graph-client/lib/src/ImplicitMSALAuthenticationProvider';
 import { MSALAuthenticationProviderOptions } from '@microsoft/microsoft-graph-client/lib/src/MSALAuthenticationProviderOptions';
 import { Client } from '@microsoft/microsoft-graph-client/lib/src/Client';
-import * as MicrosoftGraph from '@microsoft/microsoft-graph-types';
-import * as MicrosoftGraphBeta from '@microsoft/microsoft-graph-types-beta';
+import { OutlookTask, OutlookTaskFolder, User } from '@microsoft/microsoft-graph-types-beta';
 import { NotificationService } from './notification.service';
 import { ProgressService } from './progress.service';
 import { Injectable } from '@angular/core';
@@ -33,13 +32,13 @@ export class OutlookService {
         this.isConnected = false;
     }
 
-    async getMe(): Promise<MicrosoftGraphBeta.User | null> {
+    async getMe(): Promise<User | null> {
         this.progress.show();
         try {
             const result = await this.client
                 .api('/me')
                 .version('beta')
-                .get() as MicrosoftGraphBeta.User;
+                .get() as User;
 
             this.isConnected = result !== null;
             return result;
@@ -51,12 +50,14 @@ export class OutlookService {
         }
     }
 
-    async getTasks(): Promise<[MicrosoftGraphBeta.OutlookTask] | null> {
+    async getTasks(folderId: string): Promise<[OutlookTask] | null> {
         this.progress.show();
         try {
             const response = await this.client
-                .api('/me/outlook/tasks')
+                .api(`/me/outlook/taskfolders('${folderId}')/tasks`)
                 .version('beta')
+                .orderby('status')
+                .filter(`status ne 'completed'`)
                 .get();
             return response.value;
         } catch (error) {
@@ -67,7 +68,24 @@ export class OutlookService {
         }
     }
 
-    async completeTask(task: MicrosoftGraphBeta.OutlookTask): Promise<MicrosoftGraphBeta.OutlookTask | null> {
+    async getFolders(): Promise<[OutlookTaskFolder] | null> {
+        this.progress.show();
+        try {
+            const response = await this.client
+                .api('/me/outlook/taskfolders')
+                .version('beta')
+                .orderby('name')
+                .get();
+            return response.value;
+        } catch (error) {
+            this.notif.showSnack(error);
+            return null;
+        } finally {
+            this.progress.hide();
+        }
+    }
+
+    async completeTask(task: OutlookTask): Promise<OutlookTask | null> {
         this.progress.show();
         try {
             const response = await this.client
