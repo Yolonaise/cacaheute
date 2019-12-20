@@ -1,7 +1,8 @@
-<div class="w3-col m4">
-    <div class="horizontal">
-        <div *ngFor="let f of folders">
-            <app-folder [folder]="f"></app-folder>
-        </div>
-    </div>
-</div>
+<mat-grid-list cols="{{folders.length}}" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let f of folders">
+        <mat-grid-tile-header style="background-color: transparent;">
+            <mat-card-subtitle><b>{{f.name}}</b></mat-card-subtitle>
+        </mat-grid-tile-header>
+        <app-folder [folder]="f"></app-folder>
+    </mat-grid-tile>
+</mat-grid-list>

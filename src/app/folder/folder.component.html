@@ -1,1 +1,3 @@
-<p>{{folder.name}}</p>
+<div *ngFor="let t of tasks">
+    <p>{{t.status == 'completed' ? '🔵' : '🔴' }} {{t.subject}}</p>
+</div>

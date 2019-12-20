@@ -16,6 +16,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 // Animations module activation for material components.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -71,6 +72,7 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     MatNativeDateModule,
+    MatGridListModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ProgressInterceptor, multi: true },
