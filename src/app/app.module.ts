@@ -39,6 +39,9 @@ import { ProgressInterceptor } from 'src/interceptors/progress.interceptor';
 import { MainTasksComponent } from './main-tasks/main-tasks.component';
 import { FolderComponent } from './folder/folder.component';
 import { MainMeteoComponent } from './main-meteo/main-meteo.component';
+import { MainMaterialExport } from 'src/material/materialImport';
+import { TaskTileComponent } from './main-tasks/task-tile/task-tile.component';
+import { TaskOptionComponent } from './main-tasks/task-option/task-option.component';
 
 const routes: Routes = [
   { path: 'login', component: ConnectionComponent },
@@ -54,27 +57,18 @@ const routes: Routes = [
     MainTasksComponent,
     FolderComponent,
     MainMeteoComponent,
+    TaskTileComponent,
+    TaskOptionComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatProgressBarModule,
-    MatSnackBarModule,
-    MatInputModule,
     FormsModule,
-    MatListModule,
-    MatTooltipModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatNativeDateModule,
-    MatGridListModule,
+    MainMaterialExport,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ProgressInterceptor, multi: true },

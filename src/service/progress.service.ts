@@ -6,6 +6,7 @@ export class ProgressService {
     isLoading = new Subject<boolean>();
     pool = [];
     show() {
+        this.pool.push('yolonaise');
         this.isLoading.next(this.pool.length > 0);
     }
     hide() {

@@ -1,20 +1,32 @@
-<div class="bg" style="height:100%; padding: 0; margin: 0;">
-    <mat-progress-bar w3-display-topleft *ngIf="isLoading | async" mode="indeterminate" style="position: fixed;">
-    </mat-progress-bar>
-    <header class="w3-container">
-        <div class="w3-right">
-            <app-main-meteo></app-main-meteo>
+<mat-drawer-container class="bg" style="height:100%; padding: 0; margin: 0;">
+    <mat-drawer #drawer mode="push" style="color: lightcyan; background-color: rgba(0, 0, 0, 0.2);">
+        <div style="margin: 10px;">
+            <h1>Options</h1>
         </div>
-        <div class="w3-left">
-            <img class="example-header-image" src="../assets/android-chrome-512x512.png"
-                matTooltip="The best way to do santa's job">
-        </div>
-        <div class="w3-center" matTooltip="The name is a big mistake, but we endorse it">
-            <p class="title">{{ title }}</p>
-        </div>
-    </header>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div>
+            <mat-progress-bar w3-display-topleft *ngIf="isLoading | async" mode="indeterminate"
+                style="position: fixed;">
+            </mat-progress-bar>
+            <header class="w3-container">
+                <div class="w3-right">
+                    <app-main-meteo></app-main-meteo>
+                </div>
+                <div class="w3-left">
+                    <button mat-button (click)="drawer.toggle()">
+                        <img class="example-header-image" src="../assets/android-chrome-512x512.png"
+                            matTooltip="The best way to do santa's job">
+                    </button>
+                </div>
+                <div class="w3-center" matTooltip="The name is a big mistake, but we endorse it">
+                    <p class="title">{{ title }}</p>
+                </div>
+            </header>
 
-    <div class="w3-container">
-        <router-outlet></router-outlet>
-    </div>
-</div>
+            <div class="w3-container">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

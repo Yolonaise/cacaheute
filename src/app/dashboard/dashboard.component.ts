@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import User from 'cacaheute-objects/models/cacaheute.user';
 import * as MicrosoftGraphBeta from '@microsoft/microsoft-graph-types-beta';
 import { UserService } from 'src/service/user.service';
-import { WeatherService } from 'src/service/weather.service';
-import { IResponse, Emojies } from 'src/banks/weather.banks';
 import { OutlookService } from 'src/service/outlook.service';
 
 @Component({
@@ -16,11 +14,9 @@ export class DashboardComponent implements OnInit {
 
   currentUser: User;
   me: MicrosoftGraphBeta.User;
-  tasks: MicrosoftGraphBeta.OutlookTask[];
 
   constructor(
     private user: UserService,
-    private weather: WeatherService,
     private outlook: OutlookService) { }
 
   async ngOnInit() {
