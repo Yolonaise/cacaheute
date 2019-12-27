@@ -23,7 +23,6 @@ export class WeatherService {
 
             return this.currentWeather;
         } catch (err) {
-            console.log(err);
             catchError(this.handleError('getWeather', []));
             return {};
         }

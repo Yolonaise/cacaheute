@@ -1,11 +1,5 @@
 <mat-card>
     <mat-card-content>
-        <div *ngIf="!this.me" class="w3-row">
-            <button mat-button (click)="this.register()">Login</button>
-            <button mat-button (click)="this.unRegister()">logout</button>
-        </div>
-        <div *ngIf="this.me" class="w3-row">
-            <app-main-tasks></app-main-tasks>
-        </div>
+        <app-task-tile></app-task-tile>
     </mat-card-content>
 </mat-card>

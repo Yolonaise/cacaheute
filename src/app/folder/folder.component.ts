@@ -21,6 +21,5 @@ export class FolderComponent implements OnInit {
     }
 
     this.tasks = await this.outlook.getTasks(this.folder.id);
-    console.log(this.tasks);
   }
 }

@@ -6,6 +6,8 @@ import { OutlookTask, OutlookTaskFolder, User } from '@microsoft/microsoft-graph
 import { NotificationService } from './notification.service';
 import { ProgressService } from './progress.service';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { IInit } from 'src/interfaces/init.interface';
 
 const msalConfig = {
     auth: {
@@ -16,8 +18,9 @@ const msalConfig = {
 const graphScopes = ['user.read', 'tasks.read', 'tasks.readwrite'];
 
 @Injectable()
-export class OutlookService {
-    private isConnected: boolean;
+export class OutlookService implements IInit {
+    isConnected = new BehaviorSubject<boolean>(false);
+    currentUser: User;
     private client: Client;
 
     constructor(private notif: NotificationService, private progress: ProgressService) {
@@ -29,7 +32,11 @@ export class OutlookService {
             authProvider, // An instance created from previous step
         };
         this.client = Client.initWithMiddleware(options2);
-        this.isConnected = false;
+        this.isConnected.next(false);
+    }
+
+    async initialize() {
+        await this.getMe();
     }
 
     async getMe(): Promise<User | null> {
@@ -40,8 +47,27 @@ export class OutlookService {
                 .version('beta')
                 .get() as User;
 
-            this.isConnected = result !== null;
+            this.currentUser = result;
+            this.isConnected.next(result !== null);
             return result;
+        } catch (error) {
+            this.notif.showSnack(error);
+            return null;
+        } finally {
+            this.progress.hide();
+        }
+    }
+
+    async getAllTasks(): Promise<[OutlookTask] | null> {
+        this.progress.show();
+        try {
+            const response = await this.client
+                .api(`/me/outlook/tasks`)
+                .version('beta')
+                .orderby('status')
+                .filter(`status ne 'completed'`)
+                .get();
+            return response.value;
         } catch (error) {
             this.notif.showSnack(error);
             return null;

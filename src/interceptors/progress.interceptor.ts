@@ -9,11 +9,9 @@ export class ProgressInterceptor implements HttpInterceptor {
     constructor(public loaderService: ProgressService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log(this.loaderService);
         this.loaderService.show();
         return next.handle(req).pipe(
             finalize(() => this.loaderService.hide())
         );
     }
-
 }

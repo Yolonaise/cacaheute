@@ -14,6 +14,5 @@ export class MainTasksComponent implements OnInit {
 
   async ngOnInit() {
     this.folders = await this.outlook.getFolders();
-    console.log(this.folders);
   }
 }

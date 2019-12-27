@@ -1,8 +1,18 @@
-<mat-drawer-container class="bg" style="height:100%; padding: 0; margin: 0;">
-    <mat-drawer #drawer mode="push" style="color: lightcyan; background-color: rgba(0, 0, 0, 0.2);">
-        <div style="margin: 10px;">
-            <h1>Options</h1>
-        </div>
+<mat-drawer-container class="bg" style="height:100%; padding: 0; margin: 0;" hasBackdrop autosize>
+    <mat-drawer #drawer mode="side" style="color: lightcyan; background-color: rgba(0, 0, 0, 0.2);">
+        <mat-drawer-container style="height:100%; padding: 0; margin: 0; background-color: transparent;" autosize>
+            <mat-drawer #options mode="side" style="color: lightcyan; background-color: rgba(0, 0, 0, 0.2);">
+                <div style="margin: 10px;">
+                    <app-task-option></app-task-option>
+                </div>
+            </mat-drawer>
+            <mat-drawer-content>
+                <button mat-button (click)="options.toggle()">⚙️</button>
+                <div style="margin: 10px;">
+                    <h1>Ohters</h1>
+                </div>
+            </mat-drawer-content>
+        </mat-drawer-container>
     </mat-drawer>
     <mat-drawer-content>
         <div>

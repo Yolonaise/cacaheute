@@ -1,1 +1,6 @@
-<p>task-tile works!</p>
+<mat-card *ngIf="outlook.isConnected | async">
+    <mat-card-title>Todo list</mat-card-title>
+    <mat-card-content>
+        <mat-card-subtitle>you have {{tasks ? tasks.length : 0}} tasks undone</mat-card-subtitle>
+    </mat-card-content>
+</mat-card>

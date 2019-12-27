@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { OutlookService } from 'src/service/outlook.service';
+import { OutlookTask } from '@microsoft/microsoft-graph-types-beta';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-task-tile',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-tile.component.scss']
 })
 export class TaskTileComponent implements OnInit {
+  tasks: OutlookTask[];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public outlook: OutlookService) {
   }
 
+  async ngOnInit() {
+    this.outlook.isConnected.subscribe(async (value) => {
+      this.tasks = await this.outlook.getAllTasks();
+    });
+  }
 }
