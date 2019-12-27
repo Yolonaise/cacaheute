@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentRef } from '@angular/core';
 import { NotificationService } from 'src/service/notification.service';
 import { UserService } from 'src/service/user.service';
 import { NavigationService } from 'src/service/nav.service';
@@ -6,7 +6,7 @@ import { OutlookService } from 'src/service/outlook.service';
 import { ProgressService } from 'src/service/progress.service';
 import { Subject } from 'rxjs';
 import { CacaheuteClient } from 'src/client/cacaheute.client';
-import { IInit } from 'src/interfaces/init.interface';
+import { ActionService } from 'src/service/action.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,7 @@ import { IInit } from 'src/interfaces/init.interface';
 export class AppComponent implements OnInit {
   title = 'Cacaheute';
   isLoading: Subject<boolean> = this.progress.isLoading;
+  featureOpen: boolean;
 
   constructor(
     private client: CacaheuteClient,
@@ -24,9 +25,13 @@ export class AppComponent implements OnInit {
     private user: UserService,
     private nav: NavigationService,
     private progress: ProgressService,
-    private outlook: OutlookService) { }
+    private outlook: OutlookService,
+    private action: ActionService) { }
 
   async ngOnInit() {
+    this.featureOpen = false;
+    this.action.registerMenu(this);
+
     const res = await this.client.getServerStatus();
     if (res.statusCode > 299) {
       this.notif.showActSnack(res.message, 'Reconnect', async () => { await this.ngOnInit(); });
@@ -39,6 +44,10 @@ export class AppComponent implements OnInit {
     }
 
     await this.outlook.initialize();
+  }
+
+  showFeature() {
+    this.featureOpen = true;
   }
 }
 

@@ -1,6 +1,6 @@
 <ng-template [ngIf]="outlook.isConnected | async" [ngIfElse]="loggedOut">
     <div style="display: inline;">
-        <p style="display: inline;">Logged as <b>{{this.name}}</b></p>
+        <p style="display: inline;">Logged as <b>{{this.outlook.currentUser?.givenName}}</b></p>
         <button mat-button style="display: inline;">📴</button>
     </div>
 </ng-template>

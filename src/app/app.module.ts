@@ -6,17 +6,6 @@ import { RouterModule, Routes, Router } from '@angular/router';
 
 // All materials components imports are here !
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatGridListModule } from '@angular/material/grid-list';
 
 // Animations module activation for material components.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,7 +21,6 @@ import { ProgressService } from 'src/service/progress.service';
 import { WeatherService } from 'src/service/weather.service';
 
 import { AppComponent } from './app.component';
-import { MatNativeDateModule } from '@angular/material/core';
 import { ConnectionComponent } from './connection/connection.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressInterceptor } from 'src/interceptors/progress.interceptor';
@@ -42,6 +30,8 @@ import { MainMeteoComponent } from './main-meteo/main-meteo.component';
 import { MainMaterialExport } from 'src/material/materialImport';
 import { TaskTileComponent } from './main-tasks/task-tile/task-tile.component';
 import { TaskOptionComponent } from './main-tasks/task-option/task-option.component';
+import { ActionService } from 'src/service/action.service';
+import { FeatureComponent } from './feature/feature.component';
 
 const routes: Routes = [
   { path: 'login', component: ConnectionComponent },
@@ -54,11 +44,15 @@ const routes: Routes = [
     AppComponent,
     ConnectionComponent,
     DashboardComponent,
-    MainTasksComponent,
     FolderComponent,
     MainMeteoComponent,
     TaskTileComponent,
     TaskOptionComponent,
+    MainTasksComponent,
+    FeatureComponent,
+  ],
+  entryComponents: [
+    MainTasksComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -80,6 +74,7 @@ const routes: Routes = [
     WeatherService,
     OutlookService,
     ProgressService,
+    ActionService
   ],
   exports: [RouterModule],
   bootstrap: [AppComponent]

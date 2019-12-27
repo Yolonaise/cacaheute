@@ -1,3 +1,5 @@
-<div *ngFor="let t of tasks">
-    <p>{{t.status == 'completed' ? '🔵' : '🔴' }} {{t.subject}}</p>
-</div>
+<mat-list>
+    <mat-list-item *ngFor="let t of tasks">
+        <p style="color: white;">{{t.status == 'completed' ? '🔵' : '🔴' }} {{t.subject}}</p>
+    </mat-list-item>
+</mat-list>

@@ -1,8 +1,7 @@
-<mat-grid-list [cols]="folders.length" rowHeight="1:1">
-    <mat-grid-tile *ngFor="let f of folders">
-        <mat-grid-tile-header style="background-color: transparent;">
-            <mat-card-subtitle><b>{{f.name}}</b></mat-card-subtitle>
-        </mat-grid-tile-header>
+<mat-list>
+    <mat-list-item *ngFor="let f of folders" style="height: auto; display: block; color: white;">
+        <b>{{f.name}}</b>
         <app-folder [folder]="f"></app-folder>
-    </mat-grid-tile>
-</mat-grid-list>
+        <mat-divider></mat-divider>
+    </mat-list-item>
+</mat-list>
